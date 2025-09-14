@@ -1,0 +1,228 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "action",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "address[]",
+						"name": "addresses",
+						"type": "address[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "metadata",
+						"type": "string"
+					}
+				],
+				"name": "Blacklist",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "action",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "address[]",
+						"name": "addresses",
+						"type": "address[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "metadata",
+						"type": "string"
+					}
+				],
+				"name": "MerchantList",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "action",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "address[]",
+						"name": "addresses",
+						"type": "address[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "metadata",
+						"type": "string"
+					}
+				],
+				"name": "Whitelist",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "isBlacklisted",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "bool_",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "isMerchant",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "bool_",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "isWhitelisted",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "bool_",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"events": {
+				"Blacklist(string,address[],string)": {
+					"params": {
+						"action": "Tags \"add\" or \"remove\" for action type",
+						"addresses": "An array of wallet addresses that was just added or removed from address blacklist",
+						"metadata": "Optional comments or notes about the added or removed addresses."
+					}
+				},
+				"MerchantList(string,address[],string)": {
+					"params": {
+						"action": "Tags \"add\" or \"remove\" for action type",
+						"addresses": "An array of merchant wallet addresses that was just added or removed from Merchant/Redeemer whitelist",
+						"metadata": "Optional comments or notes about the added or removed addresses."
+					}
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"isBlacklisted(address)": {
+					"params": {
+						"account": "The address to query"
+					},
+					"returns": {
+						"bool_": "True if address is blacklisted, else false"
+					}
+				},
+				"isMerchant(address)": {
+					"params": {
+						"account": "The address to query"
+					},
+					"returns": {
+						"bool_": "True if the address is in merchant/redeemer whitelist and is NOT a blacklisted address, otherwise false."
+					}
+				}
+			},
+			"title": "PBM Address list Interface. ",
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"Blacklist(string,address[],string)": {
+					"notice": "Event emitted when the Blacklist is edited"
+				},
+				"MerchantList(string,address[],string)": {
+					"notice": "Event emitted when the Merchant/Redeemer List is edited"
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"isBlacklisted(address)": {
+					"notice": "Checks if the address is one of the blacklisted addresses"
+				},
+				"isMerchant(address)": {
+					"notice": "Checks if the address is one of the whitelisted merchant/redeemer addresses"
+				}
+			},
+			"notice": "The PBM address list stores and manages whitelisted merchants/redeemers and blacklisted address for the PBMs ",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/IPBMAddressList.sol": "IPBMAddressList"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/IPBMAddressList.sol": {
+			"keccak256": "0x07c0840e052f62a4be06a2e4bd55cdf2b883abe649fc7402b03a7f0d34d534cb",
+			"license": "GPL-2.0-or-later",
+			"urls": [
+				"bzz-raw://b6ff08bec076f7a1927cdf6e062ac9a76fcb8c06ff7c172974e631714e72533b",
+				"dweb:/ipfs/QmezcPURepQyvXMYh3JPSLe94ZMD4PP71yubDcxERy4vni"
+			]
+		}
+	},
+	"version": 1
+}

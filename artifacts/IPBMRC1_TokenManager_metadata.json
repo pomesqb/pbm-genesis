@@ -1,0 +1,245 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "tokenName",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "expiry",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					}
+				],
+				"name": "NewPBMTypeCreated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_faceValue",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenExpiry",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_tokenURI",
+						"type": "string"
+					}
+				],
+				"name": "createPBMTokenType",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId_",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getTokenDetails",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "faceValue",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "expiry",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "uri",
+								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "isTransferable",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "burnable",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint8",
+								"name": "decimals",
+								"type": "uint8"
+							},
+							{
+								"internalType": "address",
+								"name": "creator",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "tokenAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalSupply",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "currencySymbol",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "tokenSymbol",
+								"type": "string"
+							}
+						],
+						"internalType": "struct IPBMRC1_TokenManager.PBMToken",
+						"name": "pbmToken_",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"events": {
+				"NewPBMTypeCreated(uint256,string,uint256,uint256,address)": {
+					"params": {
+						"amount": "The initial supply of the newly created PBM token type.",
+						"creator": "The address of the account that created the new PBM token type.",
+						"expiry": "The timestamp at which the newly created PBM token type will expire.",
+						"tokenId": "The unique identifier for the newly created PBM token type.",
+						"tokenName": "A human-readable string representing the name of the newly created PBM token type."
+					}
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"createPBMTokenType(string,uint256,uint256,string)": {
+					"details": "The caller of createPBMTokenType shall be responsible for setting the creator address.  Example of uri can be found in [`sample-uri`](../assets/eip-pbmrc1/sample-uri/stx-10-static) Must emit {NewPBMTypeCreated}",
+					"params": {
+						"_faceValue": "Value of the underlying wrapped ERC20-compatible sovToken.",
+						"_name": "Name of the token.",
+						"_tokenExpiry": "Time after which the token will be rendered useless (expressed in Unix Epoch time).",
+						"_tokenURI": "Metadata URI for ERC-1155 display purposes"
+					}
+				},
+				"getTokenDetails(uint256)": {
+					"details": "This function fetches the PBMToken struct associated with the tokenId and returns it.",
+					"params": {
+						"tokenId": "The identifier of the PBM token type."
+					},
+					"returns": {
+						"pbmToken_": "A PBMToken struct containing all the details of the specified PBM token type."
+					}
+				}
+			},
+			"stateVariables": {
+				"tokenTypes": {
+					"details": "Mapping of each ERC-1155 tokenId to its corresponding PBM Token details."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"NewPBMTypeCreated(uint256,string,uint256,uint256,address)": {
+					"notice": "Emitted when a new Purpose-Bound Token (PBM) type is created within the contract."
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"createPBMTokenType(string,uint256,uint256,string)": {
+					"notice": "Creates a new PBM Token type with the provided data."
+				},
+				"getTokenDetails(uint256)": {
+					"notice": "Retrieves the details of a PBM Token type given its tokenId."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/IPBMRC1_TokenManager.sol": "IPBMRC1_TokenManager"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/IPBMRC1_TokenManager.sol": {
+			"keccak256": "0xba4348239b259d950e1535d6178de76952b83f643ea590205d932a9afb433356",
+			"license": "GPL-2.0-or-later",
+			"urls": [
+				"bzz-raw://76adc1f7aead5e155754e2e7bed0880ce99af810a346373362c6c5b6320d52e2",
+				"dweb:/ipfs/QmS7ZHCRDuQB7e87S2EeTdYfEohsyHpPBAGf16nDLsarFr"
+			]
+		}
+	},
+	"version": 1
+}

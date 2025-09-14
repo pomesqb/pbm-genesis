@@ -1,0 +1,942 @@
+{
+	"id": "4ca09cfdebe642991cbe986e0e3ec429",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.30",
+	"solcLongVersion": "0.8.30+commit.73712a01",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/IPBMAddressList.sol": {
+				"content": "// SPDX-License-Identifier: GPL-2.0-or-later\npragma solidity ^0.8.0;\n\n/// @title PBM Address list Interface. \n/// @notice The PBM address list stores and manages whitelisted merchants/redeemers and blacklisted address for the PBMs \ninterface IPBMAddressList {\n\n    /// @notice Checks if the address is one of the blacklisted addresses\n    /// @param account The address to query\n    /// @return bool_ True if address is blacklisted, else false\n    function isBlacklisted(address account) external returns (bool bool_) ; \n\n    /// @notice Checks if the address is one of the whitelisted merchant/redeemer addresses\n    /// @param account The address to query\n    /// @return bool_ True if the address is in merchant/redeemer whitelist and is NOT a blacklisted address, otherwise false.\n    function isMerchant(address account) external returns (bool bool_) ; \n\n    function isWhitelisted(address account) external returns (bool bool_) ; \n    \n    /// @notice Event emitted when the Merchant/Redeemer List is edited\n    /// @param action Tags \"add\" or \"remove\" for action type\n    /// @param addresses An array of merchant wallet addresses that was just added or removed from Merchant/Redeemer whitelist\n    /// @param metadata Optional comments or notes about the added or removed addresses.\n    event MerchantList(string action, address[] addresses, string metadata);\n    \n    /// @notice Event emitted when the Blacklist is edited\n    /// @param action Tags \"add\" or \"remove\" for action type\n    /// @param addresses An array of wallet addresses that was just added or removed from address blacklist\n    /// @param metadata Optional comments or notes about the added or removed addresses.\n    event Blacklist(string action, address[] addresses, string metadata);\n\n     event Whitelist(string action, address[] addresses, string metadata);\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/IPBMAddressList.sol": {
+				"IPBMAddressList": {
+					"abi": [
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "string",
+									"name": "action",
+									"type": "string"
+								},
+								{
+									"indexed": false,
+									"internalType": "address[]",
+									"name": "addresses",
+									"type": "address[]"
+								},
+								{
+									"indexed": false,
+									"internalType": "string",
+									"name": "metadata",
+									"type": "string"
+								}
+							],
+							"name": "Blacklist",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "string",
+									"name": "action",
+									"type": "string"
+								},
+								{
+									"indexed": false,
+									"internalType": "address[]",
+									"name": "addresses",
+									"type": "address[]"
+								},
+								{
+									"indexed": false,
+									"internalType": "string",
+									"name": "metadata",
+									"type": "string"
+								}
+							],
+							"name": "MerchantList",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "string",
+									"name": "action",
+									"type": "string"
+								},
+								{
+									"indexed": false,
+									"internalType": "address[]",
+									"name": "addresses",
+									"type": "address[]"
+								},
+								{
+									"indexed": false,
+									"internalType": "string",
+									"name": "metadata",
+									"type": "string"
+								}
+							],
+							"name": "Whitelist",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "account",
+									"type": "address"
+								}
+							],
+							"name": "isBlacklisted",
+							"outputs": [
+								{
+									"internalType": "bool",
+									"name": "bool_",
+									"type": "bool"
+								}
+							],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "account",
+									"type": "address"
+								}
+							],
+							"name": "isMerchant",
+							"outputs": [
+								{
+									"internalType": "bool",
+									"name": "bool_",
+									"type": "bool"
+								}
+							],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "address",
+									"name": "account",
+									"type": "address"
+								}
+							],
+							"name": "isWhitelisted",
+							"outputs": [
+								{
+									"internalType": "bool",
+									"name": "bool_",
+									"type": "bool"
+								}
+							],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"events": {
+							"Blacklist(string,address[],string)": {
+								"params": {
+									"action": "Tags \"add\" or \"remove\" for action type",
+									"addresses": "An array of wallet addresses that was just added or removed from address blacklist",
+									"metadata": "Optional comments or notes about the added or removed addresses."
+								}
+							},
+							"MerchantList(string,address[],string)": {
+								"params": {
+									"action": "Tags \"add\" or \"remove\" for action type",
+									"addresses": "An array of merchant wallet addresses that was just added or removed from Merchant/Redeemer whitelist",
+									"metadata": "Optional comments or notes about the added or removed addresses."
+								}
+							}
+						},
+						"kind": "dev",
+						"methods": {
+							"isBlacklisted(address)": {
+								"params": {
+									"account": "The address to query"
+								},
+								"returns": {
+									"bool_": "True if address is blacklisted, else false"
+								}
+							},
+							"isMerchant(address)": {
+								"params": {
+									"account": "The address to query"
+								},
+								"returns": {
+									"bool_": "True if the address is in merchant/redeemer whitelist and is NOT a blacklisted address, otherwise false."
+								}
+							}
+						},
+						"title": "PBM Address list Interface. ",
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"isBlacklisted(address)": "fe575a87",
+							"isMerchant(address)": "1a2f7167",
+							"isWhitelisted(address)": "3af32abf"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"action\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"addresses\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"metadata\",\"type\":\"string\"}],\"name\":\"Blacklist\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"action\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"addresses\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"metadata\",\"type\":\"string\"}],\"name\":\"MerchantList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"action\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"addresses\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"metadata\",\"type\":\"string\"}],\"name\":\"Whitelist\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"isBlacklisted\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"bool_\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"isMerchant\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"bool_\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"isWhitelisted\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"bool_\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"Blacklist(string,address[],string)\":{\"params\":{\"action\":\"Tags \\\"add\\\" or \\\"remove\\\" for action type\",\"addresses\":\"An array of wallet addresses that was just added or removed from address blacklist\",\"metadata\":\"Optional comments or notes about the added or removed addresses.\"}},\"MerchantList(string,address[],string)\":{\"params\":{\"action\":\"Tags \\\"add\\\" or \\\"remove\\\" for action type\",\"addresses\":\"An array of merchant wallet addresses that was just added or removed from Merchant/Redeemer whitelist\",\"metadata\":\"Optional comments or notes about the added or removed addresses.\"}}},\"kind\":\"dev\",\"methods\":{\"isBlacklisted(address)\":{\"params\":{\"account\":\"The address to query\"},\"returns\":{\"bool_\":\"True if address is blacklisted, else false\"}},\"isMerchant(address)\":{\"params\":{\"account\":\"The address to query\"},\"returns\":{\"bool_\":\"True if the address is in merchant/redeemer whitelist and is NOT a blacklisted address, otherwise false.\"}}},\"title\":\"PBM Address list Interface. \",\"version\":1},\"userdoc\":{\"events\":{\"Blacklist(string,address[],string)\":{\"notice\":\"Event emitted when the Blacklist is edited\"},\"MerchantList(string,address[],string)\":{\"notice\":\"Event emitted when the Merchant/Redeemer List is edited\"}},\"kind\":\"user\",\"methods\":{\"isBlacklisted(address)\":{\"notice\":\"Checks if the address is one of the blacklisted addresses\"},\"isMerchant(address)\":{\"notice\":\"Checks if the address is one of the whitelisted merchant/redeemer addresses\"}},\"notice\":\"The PBM address list stores and manages whitelisted merchants/redeemers and blacklisted address for the PBMs \",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/IPBMAddressList.sol\":\"IPBMAddressList\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/IPBMAddressList.sol\":{\"keccak256\":\"0x07c0840e052f62a4be06a2e4bd55cdf2b883abe649fc7402b03a7f0d34d534cb\",\"license\":\"GPL-2.0-or-later\",\"urls\":[\"bzz-raw://b6ff08bec076f7a1927cdf6e062ac9a76fcb8c06ff7c172974e631714e72533b\",\"dweb:/ipfs/QmezcPURepQyvXMYh3JPSLe94ZMD4PP71yubDcxERy4vni\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"events": {
+							"Blacklist(string,address[],string)": {
+								"notice": "Event emitted when the Blacklist is edited"
+							},
+							"MerchantList(string,address[],string)": {
+								"notice": "Event emitted when the Merchant/Redeemer List is edited"
+							}
+						},
+						"kind": "user",
+						"methods": {
+							"isBlacklisted(address)": {
+								"notice": "Checks if the address is one of the blacklisted addresses"
+							},
+							"isMerchant(address)": {
+								"notice": "Checks if the address is one of the whitelisted merchant/redeemer addresses"
+							}
+						},
+						"notice": "The PBM address list stores and manages whitelisted merchants/redeemers and blacklisted address for the PBMs ",
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/IPBMAddressList.sol": {
+				"ast": {
+					"absolutePath": "contracts/IPBMAddressList.sol",
+					"exportedSymbols": {
+						"IPBMAddressList": [
+							55
+						]
+					},
+					"id": 56,
+					"license": "GPL-2.0-or-later",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "45:23:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "IPBMAddressList",
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"documentation": {
+								"id": 2,
+								"nodeType": "StructuredDocumentation",
+								"src": "70:162:0",
+								"text": "@title PBM Address list Interface. \n @notice The PBM address list stores and manages whitelisted merchants/redeemers and blacklisted address for the PBMs "
+							},
+							"fullyImplemented": false,
+							"id": 55,
+							"linearizedBaseContracts": [
+								55
+							],
+							"name": "IPBMAddressList",
+							"nameLocation": "242:15:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"documentation": {
+										"id": 3,
+										"nodeType": "StructuredDocumentation",
+										"src": "265:178:0",
+										"text": "@notice Checks if the address is one of the blacklisted addresses\n @param account The address to query\n @return bool_ True if address is blacklisted, else false"
+									},
+									"functionSelector": "fe575a87",
+									"id": 10,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "isBlacklisted",
+									"nameLocation": "457:13:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 6,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 5,
+												"mutability": "mutable",
+												"name": "account",
+												"nameLocation": "479:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 10,
+												"src": "471:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 4,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "471:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "470:17:0"
+									},
+									"returnParameters": {
+										"id": 9,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 8,
+												"mutability": "mutable",
+												"name": "bool_",
+												"nameLocation": "511:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 10,
+												"src": "506:10:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bool",
+													"typeString": "bool"
+												},
+												"typeName": {
+													"id": 7,
+													"name": "bool",
+													"nodeType": "ElementaryTypeName",
+													"src": "506:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bool",
+														"typeString": "bool"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "505:12:0"
+									},
+									"scope": 55,
+									"src": "448:71:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 11,
+										"nodeType": "StructuredDocumentation",
+										"src": "526:258:0",
+										"text": "@notice Checks if the address is one of the whitelisted merchant/redeemer addresses\n @param account The address to query\n @return bool_ True if the address is in merchant/redeemer whitelist and is NOT a blacklisted address, otherwise false."
+									},
+									"functionSelector": "1a2f7167",
+									"id": 18,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "isMerchant",
+									"nameLocation": "798:10:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 14,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 13,
+												"mutability": "mutable",
+												"name": "account",
+												"nameLocation": "817:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 18,
+												"src": "809:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 12,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "809:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "808:17:0"
+									},
+									"returnParameters": {
+										"id": 17,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 16,
+												"mutability": "mutable",
+												"name": "bool_",
+												"nameLocation": "849:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 18,
+												"src": "844:10:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bool",
+													"typeString": "bool"
+												},
+												"typeName": {
+													"id": 15,
+													"name": "bool",
+													"nodeType": "ElementaryTypeName",
+													"src": "844:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bool",
+														"typeString": "bool"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "843:12:0"
+									},
+									"scope": 55,
+									"src": "789:68:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "3af32abf",
+									"id": 25,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "isWhitelisted",
+									"nameLocation": "873:13:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 21,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 20,
+												"mutability": "mutable",
+												"name": "account",
+												"nameLocation": "895:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 25,
+												"src": "887:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 19,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "887:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "886:17:0"
+									},
+									"returnParameters": {
+										"id": 24,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 23,
+												"mutability": "mutable",
+												"name": "bool_",
+												"nameLocation": "927:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 25,
+												"src": "922:10:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bool",
+													"typeString": "bool"
+												},
+												"typeName": {
+													"id": 22,
+													"name": "bool",
+													"nodeType": "ElementaryTypeName",
+													"src": "922:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bool",
+														"typeString": "bool"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "921:12:0"
+									},
+									"scope": 55,
+									"src": "864:71:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 26,
+										"nodeType": "StructuredDocumentation",
+										"src": "946:344:0",
+										"text": "@notice Event emitted when the Merchant/Redeemer List is edited\n @param action Tags \"add\" or \"remove\" for action type\n @param addresses An array of merchant wallet addresses that was just added or removed from Merchant/Redeemer whitelist\n @param metadata Optional comments or notes about the added or removed addresses."
+									},
+									"eventSelector": "255c7bb3f43b415fcde5cc3fd6b38794d983721f30b0a924ab3db736c38c4573",
+									"id": 35,
+									"name": "MerchantList",
+									"nameLocation": "1301:12:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 34,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 28,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "action",
+												"nameLocation": "1321:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 35,
+												"src": "1314:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 27,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "1314:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 31,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "addresses",
+												"nameLocation": "1339:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 35,
+												"src": "1329:19:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+													"typeString": "address[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 29,
+														"name": "address",
+														"nodeType": "ElementaryTypeName",
+														"src": "1329:7:0",
+														"stateMutability": "nonpayable",
+														"typeDescriptions": {
+															"typeIdentifier": "t_address",
+															"typeString": "address"
+														}
+													},
+													"id": 30,
+													"nodeType": "ArrayTypeName",
+													"src": "1329:9:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+														"typeString": "address[]"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 33,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "metadata",
+												"nameLocation": "1357:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 35,
+												"src": "1350:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 32,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "1350:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1313:53:0"
+									},
+									"src": "1295:72:0"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 36,
+										"nodeType": "StructuredDocumentation",
+										"src": "1377:312:0",
+										"text": "@notice Event emitted when the Blacklist is edited\n @param action Tags \"add\" or \"remove\" for action type\n @param addresses An array of wallet addresses that was just added or removed from address blacklist\n @param metadata Optional comments or notes about the added or removed addresses."
+									},
+									"eventSelector": "fd601646bc86d816d9448e5951578f6b37509d32182b7d514dac8c544bcde82a",
+									"id": 45,
+									"name": "Blacklist",
+									"nameLocation": "1700:9:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 44,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 38,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "action",
+												"nameLocation": "1717:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 45,
+												"src": "1710:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 37,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "1710:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 41,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "addresses",
+												"nameLocation": "1735:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 45,
+												"src": "1725:19:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+													"typeString": "address[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 39,
+														"name": "address",
+														"nodeType": "ElementaryTypeName",
+														"src": "1725:7:0",
+														"stateMutability": "nonpayable",
+														"typeDescriptions": {
+															"typeIdentifier": "t_address",
+															"typeString": "address"
+														}
+													},
+													"id": 40,
+													"nodeType": "ArrayTypeName",
+													"src": "1725:9:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+														"typeString": "address[]"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 43,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "metadata",
+												"nameLocation": "1753:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 45,
+												"src": "1746:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 42,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "1746:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1709:53:0"
+									},
+									"src": "1694:69:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "38ce3f622fc3fc49614c14ace1d6bcc50f6776e815be6acb3e2bc0ef93407463",
+									"id": 54,
+									"name": "Whitelist",
+									"nameLocation": "1776:9:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 53,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 47,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "action",
+												"nameLocation": "1793:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 54,
+												"src": "1786:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 46,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "1786:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 50,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "addresses",
+												"nameLocation": "1811:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 54,
+												"src": "1801:19:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+													"typeString": "address[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 48,
+														"name": "address",
+														"nodeType": "ElementaryTypeName",
+														"src": "1801:7:0",
+														"stateMutability": "nonpayable",
+														"typeDescriptions": {
+															"typeIdentifier": "t_address",
+															"typeString": "address"
+														}
+													},
+													"id": 49,
+													"nodeType": "ArrayTypeName",
+													"src": "1801:9:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+														"typeString": "address[]"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 52,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "metadata",
+												"nameLocation": "1829:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 54,
+												"src": "1822:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 51,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "1822:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1785:53:0"
+									},
+									"src": "1770:69:0"
+								}
+							],
+							"scope": 56,
+							"src": "232:1609:0",
+							"usedErrors": [],
+							"usedEvents": [
+								35,
+								45,
+								54
+							]
+						}
+					],
+					"src": "45:1796:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

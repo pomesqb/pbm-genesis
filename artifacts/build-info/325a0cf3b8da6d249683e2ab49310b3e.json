@@ -1,0 +1,1331 @@
+{
+	"id": "325a0cf3b8da6d249683e2ab49310b3e",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.30",
+	"solcLongVersion": "0.8.30+commit.73712a01",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/IPBMRC1_TokenManager.sol": {
+				"content": "// SPDX-License-Identifier: GPL-2.0-or-later\npragma solidity ^0.8.0;\n\nabstract contract IPBMTokenManager {\n    /// @dev Mapping of each ERC-1155 tokenId to its corresponding PBM Token details.\n    mapping (uint256 => PBMToken) internal tokenTypes ; \n\n    /// @notice A PBM token MUST include compulsory state variables (name, faceValue, expiry, and uri) to adhere to this standard.\n    /// @dev Represents all the details corresponding to a PBM tokenId.\n    struct PBMToken {\n        // Name of the token.\n        string name;\n\n        // Value of the underlying wrapped ERC20-compatible sovToken. Additional information on the `faceValue` can be specified by\n        // adding the optional variables: `currencySymbol` or `tokenSymbol` as indicated below\n        uint256 faceValue;\n\n        // Time after which the token will be rendered useless (expressed in Unix Epoch time).\n        uint256 expiry;\n\n        // Metadata URI for ERC-1155 display purposes.\n        string uri;\n\n        // OPTIONAL: Indicates if the PBM token can be transferred to a non merchant/redeemer wallet.\n        bool isTransferable;\n\n        // OPTIONAL: Determines whether the PBM will be burned or revoked upon expiry, under certain predefined conditions, or at the owner's discretion. \n        bool burnable;\n\n        // OPTIONAL: Number of decimal places for the token.    \n        uint8 decimals; \n\n        // OPTIONAL: The address of the creator of this PBM type on this smart contract. This field is optional because the creator is msg.sender by default.\n        address creator;\n\n        // OPTIONAL: The smart contract address of the sovToken.\n        address tokenAddress;\n\n        // OPTIONAL: The running balance of the PBM Token type that has been minted.\n        uint256 totalSupply;\n\n        // OPTIONAL: An ISO4217 three-character alphabetic code may be needed for the faceValue in multicurrency PBM use cases.\n        string currencySymbol;\n\n        // OPTIONAL: An abbreviation for the PBM token name may be assigned.\n        string tokenSymbol;\n\n        // Add other optional state variables below...\n    }\n\n    /// @notice Creates a new PBM Token type with the provided data.\n    /// @dev The caller of createPBMTokenType shall be responsible for setting the creator address. \n    /// Example of uri can be found in [`sample-uri`](../assets/eip-pbmrc1/sample-uri/stx-10-static)\n    /// Must emit {NewPBMTypeCreated}\n    /// @param _name Name of the token.\n    /// @param _faceValue Value of the underlying wrapped ERC20-compatible sovToken.\n    /// @param _tokenExpiry Time after which the token will be rendered useless (expressed in Unix Epoch time).\n    /// @param _tokenURI Metadata URI for ERC-1155 display purposes\n    function createPBMTokenType(\n        string memory _name,\n        uint256 _faceValue,\n        uint256 _tokenExpiry,\n        string memory _tokenURI\n    ) external virtual  returns (uint256 tokenId_);\n\n    /// @notice Retrieves the details of a PBM Token type given its tokenId.\n    /// @dev This function fetches the PBMToken struct associated with the tokenId and returns it.\n    /// @param tokenId The identifier of the PBM token type.\n    /// @return pbmToken_ A PBMToken struct containing all the details of the specified PBM token type.\n    function getTokenDetails(uint256 tokenId) external virtual  view returns(PBMToken memory pbmToken_);\n\n    /// @notice Emitted when a new Purpose-Bound Token (PBM) type is created within the contract.\n    /// @param tokenId The unique identifier for the newly created PBM token type.\n    /// @param tokenName A human-readable string representing the name of the newly created PBM token type.\n    /// @param amount The initial supply of the newly created PBM token type.\n    /// @param expiry The timestamp at which the newly created PBM token type will expire.\n    /// @param creator The address of the account that created the new PBM token type.\n    event NewPBMTypeCreated(uint256 tokenId, string tokenName, uint256 amount, uint256 expiry, address creator);\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/IPBMRC1_TokenManager.sol": {
+				"IPBMTokenManager": {
+					"abi": [
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "tokenId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "string",
+									"name": "tokenName",
+									"type": "string"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "amount",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "expiry",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "address",
+									"name": "creator",
+									"type": "address"
+								}
+							],
+							"name": "NewPBMTypeCreated",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "string",
+									"name": "_name",
+									"type": "string"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_faceValue",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_tokenExpiry",
+									"type": "uint256"
+								},
+								{
+									"internalType": "string",
+									"name": "_tokenURI",
+									"type": "string"
+								}
+							],
+							"name": "createPBMTokenType",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "tokenId_",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "tokenId",
+									"type": "uint256"
+								}
+							],
+							"name": "getTokenDetails",
+							"outputs": [
+								{
+									"components": [
+										{
+											"internalType": "string",
+											"name": "name",
+											"type": "string"
+										},
+										{
+											"internalType": "uint256",
+											"name": "faceValue",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "expiry",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "uri",
+											"type": "string"
+										},
+										{
+											"internalType": "bool",
+											"name": "isTransferable",
+											"type": "bool"
+										},
+										{
+											"internalType": "bool",
+											"name": "burnable",
+											"type": "bool"
+										},
+										{
+											"internalType": "uint8",
+											"name": "decimals",
+											"type": "uint8"
+										},
+										{
+											"internalType": "address",
+											"name": "creator",
+											"type": "address"
+										},
+										{
+											"internalType": "address",
+											"name": "tokenAddress",
+											"type": "address"
+										},
+										{
+											"internalType": "uint256",
+											"name": "totalSupply",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "currencySymbol",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "tokenSymbol",
+											"type": "string"
+										}
+									],
+									"internalType": "struct IPBMTokenManager.PBMToken",
+									"name": "pbmToken_",
+									"type": "tuple"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"events": {
+							"NewPBMTypeCreated(uint256,string,uint256,uint256,address)": {
+								"params": {
+									"amount": "The initial supply of the newly created PBM token type.",
+									"creator": "The address of the account that created the new PBM token type.",
+									"expiry": "The timestamp at which the newly created PBM token type will expire.",
+									"tokenId": "The unique identifier for the newly created PBM token type.",
+									"tokenName": "A human-readable string representing the name of the newly created PBM token type."
+								}
+							}
+						},
+						"kind": "dev",
+						"methods": {
+							"createPBMTokenType(string,uint256,uint256,string)": {
+								"details": "The caller of createPBMTokenType shall be responsible for setting the creator address.  Example of uri can be found in [`sample-uri`](../assets/eip-pbmrc1/sample-uri/stx-10-static) Must emit {NewPBMTypeCreated}",
+								"params": {
+									"_faceValue": "Value of the underlying wrapped ERC20-compatible sovToken.",
+									"_name": "Name of the token.",
+									"_tokenExpiry": "Time after which the token will be rendered useless (expressed in Unix Epoch time).",
+									"_tokenURI": "Metadata URI for ERC-1155 display purposes"
+								}
+							},
+							"getTokenDetails(uint256)": {
+								"details": "This function fetches the PBMToken struct associated with the tokenId and returns it.",
+								"params": {
+									"tokenId": "The identifier of the PBM token type."
+								},
+								"returns": {
+									"pbmToken_": "A PBMToken struct containing all the details of the specified PBM token type."
+								}
+							}
+						},
+						"stateVariables": {
+							"tokenTypes": {
+								"details": "Mapping of each ERC-1155 tokenId to its corresponding PBM Token details."
+							}
+						},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"createPBMTokenType(string,uint256,uint256,string)": "c9185596",
+							"getTokenDetails(uint256)": "c1e03728"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"tokenName\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"}],\"name\":\"NewPBMTypeCreated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_faceValue\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_tokenExpiry\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_tokenURI\",\"type\":\"string\"}],\"name\":\"createPBMTokenType\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId_\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getTokenDetails\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"faceValue\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"uri\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"isTransferable\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"burnable\",\"type\":\"bool\"},{\"internalType\":\"uint8\",\"name\":\"decimals\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"totalSupply\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"currencySymbol\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"tokenSymbol\",\"type\":\"string\"}],\"internalType\":\"struct IPBMTokenManager.PBMToken\",\"name\":\"pbmToken_\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"NewPBMTypeCreated(uint256,string,uint256,uint256,address)\":{\"params\":{\"amount\":\"The initial supply of the newly created PBM token type.\",\"creator\":\"The address of the account that created the new PBM token type.\",\"expiry\":\"The timestamp at which the newly created PBM token type will expire.\",\"tokenId\":\"The unique identifier for the newly created PBM token type.\",\"tokenName\":\"A human-readable string representing the name of the newly created PBM token type.\"}}},\"kind\":\"dev\",\"methods\":{\"createPBMTokenType(string,uint256,uint256,string)\":{\"details\":\"The caller of createPBMTokenType shall be responsible for setting the creator address.  Example of uri can be found in [`sample-uri`](../assets/eip-pbmrc1/sample-uri/stx-10-static) Must emit {NewPBMTypeCreated}\",\"params\":{\"_faceValue\":\"Value of the underlying wrapped ERC20-compatible sovToken.\",\"_name\":\"Name of the token.\",\"_tokenExpiry\":\"Time after which the token will be rendered useless (expressed in Unix Epoch time).\",\"_tokenURI\":\"Metadata URI for ERC-1155 display purposes\"}},\"getTokenDetails(uint256)\":{\"details\":\"This function fetches the PBMToken struct associated with the tokenId and returns it.\",\"params\":{\"tokenId\":\"The identifier of the PBM token type.\"},\"returns\":{\"pbmToken_\":\"A PBMToken struct containing all the details of the specified PBM token type.\"}}},\"stateVariables\":{\"tokenTypes\":{\"details\":\"Mapping of each ERC-1155 tokenId to its corresponding PBM Token details.\"}},\"version\":1},\"userdoc\":{\"events\":{\"NewPBMTypeCreated(uint256,string,uint256,uint256,address)\":{\"notice\":\"Emitted when a new Purpose-Bound Token (PBM) type is created within the contract.\"}},\"kind\":\"user\",\"methods\":{\"createPBMTokenType(string,uint256,uint256,string)\":{\"notice\":\"Creates a new PBM Token type with the provided data.\"},\"getTokenDetails(uint256)\":{\"notice\":\"Retrieves the details of a PBM Token type given its tokenId.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/IPBMRC1_TokenManager.sol\":\"IPBMTokenManager\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/IPBMRC1_TokenManager.sol\":{\"keccak256\":\"0x13a38d461ff8682551fee9af1b397076b75c141e934bbb1a6e977d7ab9f66a88\",\"license\":\"GPL-2.0-or-later\",\"urls\":[\"bzz-raw://3b7e45b6568c26625b17ce85149a049e274d8ce8122122e8affe14d467a5ccb2\",\"dweb:/ipfs/QmXumn7oM8K8613t9Wt8M6EtuDJECWdQuZQ6NeCviT6Gxa\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [
+							{
+								"astId": 7,
+								"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+								"label": "tokenTypes",
+								"offset": 0,
+								"slot": "0",
+								"type": "t_mapping(t_uint256,t_struct(PBMToken)33_storage)"
+							}
+						],
+						"types": {
+							"t_address": {
+								"encoding": "inplace",
+								"label": "address",
+								"numberOfBytes": "20"
+							},
+							"t_bool": {
+								"encoding": "inplace",
+								"label": "bool",
+								"numberOfBytes": "1"
+							},
+							"t_mapping(t_uint256,t_struct(PBMToken)33_storage)": {
+								"encoding": "mapping",
+								"key": "t_uint256",
+								"label": "mapping(uint256 => struct IPBMTokenManager.PBMToken)",
+								"numberOfBytes": "32",
+								"value": "t_struct(PBMToken)33_storage"
+							},
+							"t_string_storage": {
+								"encoding": "bytes",
+								"label": "string",
+								"numberOfBytes": "32"
+							},
+							"t_struct(PBMToken)33_storage": {
+								"encoding": "inplace",
+								"label": "struct IPBMTokenManager.PBMToken",
+								"members": [
+									{
+										"astId": 10,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "name",
+										"offset": 0,
+										"slot": "0",
+										"type": "t_string_storage"
+									},
+									{
+										"astId": 12,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "faceValue",
+										"offset": 0,
+										"slot": "1",
+										"type": "t_uint256"
+									},
+									{
+										"astId": 14,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "expiry",
+										"offset": 0,
+										"slot": "2",
+										"type": "t_uint256"
+									},
+									{
+										"astId": 16,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "uri",
+										"offset": 0,
+										"slot": "3",
+										"type": "t_string_storage"
+									},
+									{
+										"astId": 18,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "isTransferable",
+										"offset": 0,
+										"slot": "4",
+										"type": "t_bool"
+									},
+									{
+										"astId": 20,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "burnable",
+										"offset": 1,
+										"slot": "4",
+										"type": "t_bool"
+									},
+									{
+										"astId": 22,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "decimals",
+										"offset": 2,
+										"slot": "4",
+										"type": "t_uint8"
+									},
+									{
+										"astId": 24,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "creator",
+										"offset": 3,
+										"slot": "4",
+										"type": "t_address"
+									},
+									{
+										"astId": 26,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "tokenAddress",
+										"offset": 0,
+										"slot": "5",
+										"type": "t_address"
+									},
+									{
+										"astId": 28,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "totalSupply",
+										"offset": 0,
+										"slot": "6",
+										"type": "t_uint256"
+									},
+									{
+										"astId": 30,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "currencySymbol",
+										"offset": 0,
+										"slot": "7",
+										"type": "t_string_storage"
+									},
+									{
+										"astId": 32,
+										"contract": "contracts/IPBMRC1_TokenManager.sol:IPBMTokenManager",
+										"label": "tokenSymbol",
+										"offset": 0,
+										"slot": "8",
+										"type": "t_string_storage"
+									}
+								],
+								"numberOfBytes": "288"
+							},
+							"t_uint256": {
+								"encoding": "inplace",
+								"label": "uint256",
+								"numberOfBytes": "32"
+							},
+							"t_uint8": {
+								"encoding": "inplace",
+								"label": "uint8",
+								"numberOfBytes": "1"
+							}
+						}
+					},
+					"userdoc": {
+						"events": {
+							"NewPBMTypeCreated(uint256,string,uint256,uint256,address)": {
+								"notice": "Emitted when a new Purpose-Bound Token (PBM) type is created within the contract."
+							}
+						},
+						"kind": "user",
+						"methods": {
+							"createPBMTokenType(string,uint256,uint256,string)": {
+								"notice": "Creates a new PBM Token type with the provided data."
+							},
+							"getTokenDetails(uint256)": {
+								"notice": "Retrieves the details of a PBM Token type given its tokenId."
+							}
+						},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/IPBMRC1_TokenManager.sol": {
+				"ast": {
+					"absolutePath": "contracts/IPBMRC1_TokenManager.sol",
+					"exportedSymbols": {
+						"IPBMTokenManager": [
+							70
+						]
+					},
+					"id": 71,
+					"license": "GPL-2.0-or-later",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "45:23:0"
+						},
+						{
+							"abstract": true,
+							"baseContracts": [],
+							"canonicalName": "IPBMTokenManager",
+							"contractDependencies": [],
+							"contractKind": "contract",
+							"fullyImplemented": false,
+							"id": 70,
+							"linearizedBaseContracts": [
+								70
+							],
+							"name": "IPBMTokenManager",
+							"nameLocation": "88:16:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"constant": false,
+									"documentation": {
+										"id": 2,
+										"nodeType": "StructuredDocumentation",
+										"src": "111:81:0",
+										"text": "@dev Mapping of each ERC-1155 tokenId to its corresponding PBM Token details."
+									},
+									"id": 7,
+									"mutability": "mutable",
+									"name": "tokenTypes",
+									"nameLocation": "236:10:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 70,
+									"src": "197:49:0",
+									"stateVariable": true,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_PBMToken_$33_storage_$",
+										"typeString": "mapping(uint256 => struct IPBMTokenManager.PBMToken)"
+									},
+									"typeName": {
+										"id": 6,
+										"keyName": "",
+										"keyNameLocation": "-1:-1:-1",
+										"keyType": {
+											"id": 3,
+											"name": "uint256",
+											"nodeType": "ElementaryTypeName",
+											"src": "206:7:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											}
+										},
+										"nodeType": "Mapping",
+										"src": "197:29:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_PBMToken_$33_storage_$",
+											"typeString": "mapping(uint256 => struct IPBMTokenManager.PBMToken)"
+										},
+										"valueName": "",
+										"valueNameLocation": "-1:-1:-1",
+										"valueType": {
+											"id": 5,
+											"nodeType": "UserDefinedTypeName",
+											"pathNode": {
+												"id": 4,
+												"name": "PBMToken",
+												"nameLocations": [
+													"217:8:0"
+												],
+												"nodeType": "IdentifierPath",
+												"referencedDeclaration": 33,
+												"src": "217:8:0"
+											},
+											"referencedDeclaration": 33,
+											"src": "217:8:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_struct$_PBMToken_$33_storage_ptr",
+												"typeString": "struct IPBMTokenManager.PBMToken"
+											}
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"canonicalName": "IPBMTokenManager.PBMToken",
+									"documentation": {
+										"id": 8,
+										"nodeType": "StructuredDocumentation",
+										"src": "255:198:0",
+										"text": "@notice A PBM token MUST include compulsory state variables (name, faceValue, expiry, and uri) to adhere to this standard.\n @dev Represents all the details corresponding to a PBM tokenId."
+									},
+									"id": 33,
+									"members": [
+										{
+											"constant": false,
+											"id": 10,
+											"mutability": "mutable",
+											"name": "name",
+											"nameLocation": "521:4:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "514:11:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											},
+											"typeName": {
+												"id": 9,
+												"name": "string",
+												"nodeType": "ElementaryTypeName",
+												"src": "514:6:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_storage_ptr",
+													"typeString": "string"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 12,
+											"mutability": "mutable",
+											"name": "faceValue",
+											"nameLocation": "771:9:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "763:17:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 11,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "763:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 14,
+											"mutability": "mutable",
+											"name": "expiry",
+											"nameLocation": "894:6:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "886:14:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 13,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "886:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 16,
+											"mutability": "mutable",
+											"name": "uri",
+											"nameLocation": "973:3:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "966:10:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											},
+											"typeName": {
+												"id": 15,
+												"name": "string",
+												"nodeType": "ElementaryTypeName",
+												"src": "966:6:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_storage_ptr",
+													"typeString": "string"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 18,
+											"mutability": "mutable",
+											"name": "isTransferable",
+											"nameLocation": "1094:14:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "1089:19:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_bool",
+												"typeString": "bool"
+											},
+											"typeName": {
+												"id": 17,
+												"name": "bool",
+												"nodeType": "ElementaryTypeName",
+												"src": "1089:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bool",
+													"typeString": "bool"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 20,
+											"mutability": "mutable",
+											"name": "burnable",
+											"nameLocation": "1279:8:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "1274:13:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_bool",
+												"typeString": "bool"
+											},
+											"typeName": {
+												"id": 19,
+												"name": "bool",
+												"nodeType": "ElementaryTypeName",
+												"src": "1274:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bool",
+													"typeString": "bool"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 22,
+											"mutability": "mutable",
+											"name": "decimals",
+											"nameLocation": "1369:8:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "1363:14:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint8",
+												"typeString": "uint8"
+											},
+											"typeName": {
+												"id": 21,
+												"name": "uint8",
+												"nodeType": "ElementaryTypeName",
+												"src": "1363:5:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint8",
+													"typeString": "uint8"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 24,
+											"mutability": "mutable",
+											"name": "creator",
+											"nameLocation": "1555:7:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "1547:15:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_address",
+												"typeString": "address"
+											},
+											"typeName": {
+												"id": 23,
+												"name": "address",
+												"nodeType": "ElementaryTypeName",
+												"src": "1547:7:0",
+												"stateMutability": "nonpayable",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 26,
+											"mutability": "mutable",
+											"name": "tokenAddress",
+											"nameLocation": "1646:12:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "1638:20:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_address",
+												"typeString": "address"
+											},
+											"typeName": {
+												"id": 25,
+												"name": "address",
+												"nodeType": "ElementaryTypeName",
+												"src": "1638:7:0",
+												"stateMutability": "nonpayable",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 28,
+											"mutability": "mutable",
+											"name": "totalSupply",
+											"nameLocation": "1762:11:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "1754:19:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 27,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "1754:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 30,
+											"mutability": "mutable",
+											"name": "currencySymbol",
+											"nameLocation": "1919:14:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "1912:21:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											},
+											"typeName": {
+												"id": 29,
+												"name": "string",
+												"nodeType": "ElementaryTypeName",
+												"src": "1912:6:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_storage_ptr",
+													"typeString": "string"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 32,
+											"mutability": "mutable",
+											"name": "tokenSymbol",
+											"nameLocation": "2028:11:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 33,
+											"src": "2021:18:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											},
+											"typeName": {
+												"id": 31,
+												"name": "string",
+												"nodeType": "ElementaryTypeName",
+												"src": "2021:6:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_storage_ptr",
+													"typeString": "string"
+												}
+											},
+											"visibility": "internal"
+										}
+									],
+									"name": "PBMToken",
+									"nameLocation": "465:8:0",
+									"nodeType": "StructDefinition",
+									"scope": 70,
+									"src": "458:1644:0",
+									"visibility": "public"
+								},
+								{
+									"documentation": {
+										"id": 34,
+										"nodeType": "StructuredDocumentation",
+										"src": "2108:609:0",
+										"text": "@notice Creates a new PBM Token type with the provided data.\n @dev The caller of createPBMTokenType shall be responsible for setting the creator address. \n Example of uri can be found in [`sample-uri`](../assets/eip-pbmrc1/sample-uri/stx-10-static)\n Must emit {NewPBMTypeCreated}\n @param _name Name of the token.\n @param _faceValue Value of the underlying wrapped ERC20-compatible sovToken.\n @param _tokenExpiry Time after which the token will be rendered useless (expressed in Unix Epoch time).\n @param _tokenURI Metadata URI for ERC-1155 display purposes"
+									},
+									"functionSelector": "c9185596",
+									"id": 47,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "createPBMTokenType",
+									"nameLocation": "2731:18:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 43,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 36,
+												"mutability": "mutable",
+												"name": "_name",
+												"nameLocation": "2773:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 47,
+												"src": "2759:19:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 35,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "2759:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 38,
+												"mutability": "mutable",
+												"name": "_faceValue",
+												"nameLocation": "2796:10:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 47,
+												"src": "2788:18:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 37,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2788:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 40,
+												"mutability": "mutable",
+												"name": "_tokenExpiry",
+												"nameLocation": "2824:12:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 47,
+												"src": "2816:20:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 39,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2816:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 42,
+												"mutability": "mutable",
+												"name": "_tokenURI",
+												"nameLocation": "2860:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 47,
+												"src": "2846:23:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 41,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "2846:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2749:126:0"
+									},
+									"returnParameters": {
+										"id": 46,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 45,
+												"mutability": "mutable",
+												"name": "tokenId_",
+												"nameLocation": "2911:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 47,
+												"src": "2903:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 44,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "2903:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "2902:18:0"
+									},
+									"scope": 70,
+									"src": "2722:199:0",
+									"stateMutability": "nonpayable",
+									"virtual": true,
+									"visibility": "external"
+								},
+								{
+									"documentation": {
+										"id": 48,
+										"nodeType": "StructuredDocumentation",
+										"src": "2927:336:0",
+										"text": "@notice Retrieves the details of a PBM Token type given its tokenId.\n @dev This function fetches the PBMToken struct associated with the tokenId and returns it.\n @param tokenId The identifier of the PBM token type.\n @return pbmToken_ A PBMToken struct containing all the details of the specified PBM token type."
+									},
+									"functionSelector": "c1e03728",
+									"id": 56,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getTokenDetails",
+									"nameLocation": "3277:15:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 51,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 50,
+												"mutability": "mutable",
+												"name": "tokenId",
+												"nameLocation": "3301:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 56,
+												"src": "3293:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 49,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3293:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3292:17:0"
+									},
+									"returnParameters": {
+										"id": 55,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 54,
+												"mutability": "mutable",
+												"name": "pbmToken_",
+												"nameLocation": "3357:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 56,
+												"src": "3341:25:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_struct$_PBMToken_$33_memory_ptr",
+													"typeString": "struct IPBMTokenManager.PBMToken"
+												},
+												"typeName": {
+													"id": 53,
+													"nodeType": "UserDefinedTypeName",
+													"pathNode": {
+														"id": 52,
+														"name": "PBMToken",
+														"nameLocations": [
+															"3341:8:0"
+														],
+														"nodeType": "IdentifierPath",
+														"referencedDeclaration": 33,
+														"src": "3341:8:0"
+													},
+													"referencedDeclaration": 33,
+													"src": "3341:8:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_struct$_PBMToken_$33_storage_ptr",
+														"typeString": "struct IPBMTokenManager.PBMToken"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3340:27:0"
+									},
+									"scope": 70,
+									"src": "3268:100:0",
+									"stateMutability": "view",
+									"virtual": true,
+									"visibility": "external"
+								},
+								{
+									"anonymous": false,
+									"documentation": {
+										"id": 57,
+										"nodeType": "StructuredDocumentation",
+										"src": "3374:540:0",
+										"text": "@notice Emitted when a new Purpose-Bound Token (PBM) type is created within the contract.\n @param tokenId The unique identifier for the newly created PBM token type.\n @param tokenName A human-readable string representing the name of the newly created PBM token type.\n @param amount The initial supply of the newly created PBM token type.\n @param expiry The timestamp at which the newly created PBM token type will expire.\n @param creator The address of the account that created the new PBM token type."
+									},
+									"eventSelector": "bbb805bf89819da42bb55052edd2bf6db1c2256ec4c19cf1607de95efc92762f",
+									"id": 69,
+									"name": "NewPBMTypeCreated",
+									"nameLocation": "3925:17:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 68,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 59,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "tokenId",
+												"nameLocation": "3951:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 69,
+												"src": "3943:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 58,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3943:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 61,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "tokenName",
+												"nameLocation": "3967:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 69,
+												"src": "3960:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 60,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "3960:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 63,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "amount",
+												"nameLocation": "3986:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 69,
+												"src": "3978:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 62,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3978:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 65,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "expiry",
+												"nameLocation": "4002:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 69,
+												"src": "3994:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 64,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "3994:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 67,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "creator",
+												"nameLocation": "4018:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 69,
+												"src": "4010:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 66,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "4010:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "3942:84:0"
+									},
+									"src": "3919:108:0"
+								}
+							],
+							"scope": 71,
+							"src": "70:3959:0",
+							"usedErrors": [],
+							"usedEvents": [
+								69
+							]
+						}
+					],
+					"src": "45:3984:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}
