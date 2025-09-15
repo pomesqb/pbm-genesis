@@ -1,4 +1,3 @@
-// File: PBMWrapper.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -12,21 +11,10 @@ import "./PBMLogic.sol";
 
 library ERC20Helper {
     using SafeERC20 for IERC20;
-
-    function safeTransferFrom(
-        IERC20 token,
-        address from,
-        address to,
-        uint256 value
-    ) internal {
+    function safeTransferFrom(IERC20 token, address from, address to, uint256 value) internal {
         SafeERC20.safeTransferFrom(token, from, to, value);
     }
-
-    function safeTransfer(
-        IERC20 token,
-        address to,
-        uint256 value
-    ) internal {
+    function safeTransfer(IERC20 token, address to, uint256 value) internal {
         SafeERC20.safeTransfer(token, to, value);
     }
 }
@@ -53,132 +41,68 @@ abstract contract PBMWrapper is ERC1155, Ownable, Pausable, IPBMRC1 {
         return arr;
     }
 
-    // --- 函式覆寫修正 ---
-
-    // ✅ 修正 1: 實現 uri 函式以解決 ERC1155 和 IPBMRC1 的衝突
-    // 我們將呼叫 PBMTokenManager 中的 uri 邏輯
-    function uri(uint256 tokenId)
-        public
-        view
-        override(ERC1155, IPBMRC1)
-        returns (string memory)
-    {
+    function initialise(address _spotToken, uint256 _expiry, address _pbmLogic)
+        external virtual onlyOwner {
+        require(!initialised, "PBM: Contract already initialised");
+        require(_spotToken != address(0) && _pbmLogic != address(0), "PBM: Invalid addresses");
+        require(_expiry == 0 || _expiry > block.timestamp, "PBM: Invalid expiry");
+        spotToken = _spotToken;
+        contractExpiry = _expiry;
+        pbmLogic = PBMLogic(_pbmLogic);
+        initialised = true;
+    }
+    
+    function uri(uint256 tokenId) public view virtual override(ERC1155, IPBMRC1) returns (string memory) {
         return PBMTokenManager(pbmTokenManager).uri(tokenId);
     }
 
-    // ✅ 修正 2: 實現 owner 函式以解決 Ownable 和 IPBMRC1 的衝突
-    // 我們直接使用 Ownable 已有的功能
-    function owner() public view override(Ownable, IPBMRC1) returns (address) {
+    function owner() public view virtual override(Ownable, IPBMRC1) returns (address) {
         return super.owner();
     }
 
-    // ✅ 修正 3: 實現 transferOwnership 以解決 Ownable 和 IPBMRC1 的衝突
-    // 我們直接使用 Ownable 已有的功能
-    function transferOwnership(address newOwner) public override(Ownable, IPBMRC1) onlyOwner {
+    function transferOwnership(address newOwner) public virtual override(Ownable, IPBMRC1) onlyOwner {
         super.transferOwnership(newOwner);
     }
 
-    // ✅ 修正 4: 為 safeTransferFrom 指定覆寫來源
-    function safeTransferFrom(
-        address from,
-        address to,
-        uint256 id,
-        uint256 amount,
-        bytes memory data
-    ) public virtual override(ERC1155, IPBMRC1) whenNotPaused {
-        // ... (原有的函式內容保持不變)
-        require(
-            from == _msgSender() || isApprovedForAll(from, _msgSender()),
-            "ERC1155: caller is not token owner nor approved"
-        );
-        require(
-            pbmLogic.transferPreCheck(from, to),
-            "PBM Logic: transfer preCheck not satisfied."
-        );
-        if (pbmLogic.unwrapPreCheck(to)) {
-            uint256 valueOfTokens = amount *
-                (
-                    PBMTokenManager(pbmTokenManager).getTokenValue(id)
-                );
+    function safeTransferFrom(address from, address to, uint256 id, uint256 amount, bytes memory data)
+        public virtual override(ERC1155, IPBMRC1) whenNotPaused {
+        require(from == _msgSender() || isApprovedForAll(from, _msgSender()), "ERC1155: caller is not token owner nor approved");
+        require(pbmLogic.transferPreCheck(from, to, id), "PBM Logic: transfer preCheck not satisfied.");
+        if (pbmLogic.unwrapPreCheck(to, id, 0)) { // Passing 0 as default valueDate
+            uint256 valueOfTokens = amount * (PBMTokenManager(pbmTokenManager).getTokenValue(id));
             _burn(from, id, amount);
-            PBMTokenManager(pbmTokenManager).decreaseBalanceSupply(
-                serialise(id),
-                serialise(amount)
-            );
+            PBMTokenManager(pbmTokenManager).decreaseBalanceSupply(serialise(id), serialise(amount));
             ERC20Helper.safeTransfer(IERC20(spotToken), to, valueOfTokens);
-            emit MerchantPayment(
-                from,
-                to,
-                serialise(id),
-                serialise(amount),
-                spotToken,
-                valueOfTokens
-            );
+            emit MerchantPayment(from, to, serialise(id), serialise(amount), spotToken, valueOfTokens);
         } else {
             _safeTransferFrom(from, to, id, amount, abi.encodePacked(data));
         }
     }
-    
-    // --- 其他函式 ---
 
-    // ✅ 修正 5: 移除 mint 和 batchMint 的 override 關鍵字
-    function mint(
-        uint256 tokenId,
-        uint256 amount,
-        address receiver
-    ) public virtual whenNotPaused whenInitialised {
-        uint256 valueOfNewTokens = amount *
-            (
-                PBMTokenManager(pbmTokenManager).getTokenValue(tokenId)
-            );
-        require(
-            pbmLogic.transferPreCheck(address(0), receiver),
-            "PBM: 'to' address blacklisted"
-        );
-        ERC20Helper.safeTransferFrom(
-            IERC20(spotToken),
-            msg.sender,
-            address(this),
-            valueOfNewTokens
-        );
-        PBMTokenManager(pbmTokenManager).increaseBalanceSupply(
-            serialise(tokenId),
-            serialise(amount)
-        );
+    function mint(uint256 tokenId, uint256 amount, address receiver) public virtual override whenNotPaused whenInitialised {
+        uint256 valueOfNewTokens = amount * (PBMTokenManager(pbmTokenManager).getTokenValue(tokenId));
+        require(pbmLogic.transferPreCheck(address(0), receiver, tokenId), "PBM: 'to' address blacklisted");
+        ERC20Helper.safeTransferFrom(IERC20(spotToken), msg.sender, address(this), valueOfNewTokens);
+        PBMTokenManager(pbmTokenManager).increaseBalanceSupply(serialise(tokenId), serialise(amount));
         _mint(receiver, tokenId, amount, "");
     }
 
-    function batchMint(
-        uint256[] memory tokenIds,
-        uint256[] memory amounts,
-        address receiver
-    ) public virtual whenNotPaused whenInitialised {
-         uint256 valueOfNewTokens = 0;
+    function batchMint(uint256[] memory tokenIds, uint256[] memory amounts, address receiver)
+        public virtual override whenNotPaused whenInitialised {
+        uint256 valueOfNewTokens = 0;
         for (uint256 i = 0; i < tokenIds.length; i++) {
-            valueOfNewTokens +=
-                amounts[i] *
-                (
-                    PBMTokenManager(pbmTokenManager).getTokenValue(
-                        tokenIds[i]
-                    )
-                );
+            valueOfNewTokens += amounts[i] * (PBMTokenManager(pbmTokenManager).getTokenValue(tokenIds[i]));
         }
-        require(
-            pbmLogic.transferPreCheck(address(0), receiver),
-            "PBM: 'to' address blacklisted"
-        );
-        ERC20Helper.safeTransferFrom(
-            IERC20(spotToken),
-            msg.sender,
-            address(this),
-            valueOfNewTokens
-        );
-        PBMTokenManager(pbmTokenManager).increaseBalanceSupply(
-            tokenIds,
-            amounts
-        );
+        require(pbmLogic.transferPreCheck(address(0), receiver, tokenIds[0]), "PBM: 'to' address blacklisted");
+        ERC20Helper.safeTransferFrom(IERC20(spotToken), msg.sender, address(this), valueOfNewTokens);
+        PBMTokenManager(pbmTokenManager).increaseBalanceSupply(tokenIds, amounts);
         _mintBatch(receiver, tokenIds, amounts, "");
     }
-    
-    // ... (其他函式 initialise, revokePBM 等保持不變)
+
+    function revokePBM(uint256 tokenId) public virtual override whenNotPaused {
+        uint256 valueOfTokens = PBMTokenManager(pbmTokenManager).getPBMRevokeValue(tokenId);
+        PBMTokenManager(pbmTokenManager).revokePBM(tokenId, msg.sender);
+        ERC20Helper.safeTransfer(IERC20(spotToken), msg.sender, valueOfTokens);
+        emit PBMrevokeWithdraw(msg.sender, tokenId, spotToken, valueOfTokens);
+    }
 }

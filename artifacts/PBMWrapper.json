@@ -53,6 +53,7 @@
 			"balanceOfBatch(address[],uint256[])": "4e1273f4",
 			"batchMint(uint256[],uint256[],address)": "fb34b201",
 			"contractExpiry()": "89aba642",
+			"initialise(address,uint256,address)": "07e82e0f",
 			"initialised()": "07003bb4",
 			"isApprovedForAll(address,address)": "e985e9c5",
 			"mint(uint256,uint256,address)": "e7d3fe6b",
@@ -526,6 +527,29 @@
 				}
 			],
 			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_spotToken",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_expiry",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address",
+					"name": "_pbmLogic",
+					"type": "address"
+				}
+			],
+			"name": "initialise",
+			"outputs": [],
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{

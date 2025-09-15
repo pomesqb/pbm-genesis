@@ -268,30 +268,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
-						"name": "tokenTypeName",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "spotAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "getTokenIdByTypeName",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "uint256",
 						"name": "tokenId",
 						"type": "uint256"
@@ -455,7 +431,6 @@
 			}
 		],
 		"devdoc": {
-			"author": "Monetary Authority of Singapore",
 			"errors": {
 				"OwnableInvalidOwner(address)": [
 					{
@@ -480,13 +455,11 @@
 					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
 				}
 			},
-			"title": "PBMTokenManager",
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
-			"notice": "Contract for managing PBM token types",
 			"version": 1
 		}
 	},
@@ -523,19 +496,19 @@
 			]
 		},
 		"contracts/IPBMTokenManager.sol": {
-			"keccak256": "0xa3e6d012bed3e8eadf1107f1ff1a7ed44a93736e920a90196a24c4812603c731",
+			"keccak256": "0xb4a5bf92cdb6284b72a56ee72995ab22b823cd395aec9a62d5d92f7171a1b7a0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://240d2a13c062e152ebcbfb75846d092e9bc70f78c0708e4c52e5604c53a35105",
-				"dweb:/ipfs/Qmb3MPt1UrEmqnqrcXDbq83116FK3scCBkUgs3Vss2bd53"
+				"bzz-raw://845e5480e4da0444c960fdd1d9ec99e5d1fbde12f14e6dced6324bd3be53c2dd",
+				"dweb:/ipfs/QmTSHnUWpXpCrJxxfbh9EiTGJFJn7Uh842QKs4aQgWf32j"
 			]
 		},
 		"contracts/PBMTokenManager.sol": {
-			"keccak256": "0x5ba8f56ab4b870e2c798a6f35b2572d4b0e9aef18b718dcd8b9d668c3429f94f",
+			"keccak256": "0x119d98b77ad32f92c9a38408e627fbc4aa7713e2c0f83246a04d47a48156938d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8c46f6dcd5818892158710216144b729282517c03ea08cb6c635033de49ccc5c",
-				"dweb:/ipfs/Qmb88vAATYX2ZxZf35fGzrAXNMkgYJvqKvLsA52dPF1Ust"
+				"bzz-raw://7ea9c7d9ef7fbbef655ffcb1312df8afbc3ae65397e526b06941a0fb94f02fc7",
+				"dweb:/ipfs/QmZsweGLdSTfcrbTPTgAb8VDz7rajrZPHa6eNtVbawsSPt"
 			]
 		}
 	},

@@ -83,44 +83,8 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address[]",
-						"name": "addresses",
-						"type": "address[]"
-					},
-					{
-						"internalType": "string",
-						"name": "metadata",
-						"type": "string"
-					}
-				],
-				"name": "addMerchantAddresses",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "addresses",
-						"type": "address[]"
-					},
-					{
-						"internalType": "string",
-						"name": "metadata",
-						"type": "string"
-					}
-				],
-				"name": "blacklistAddresses",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
-						"name": "_address",
+						"name": "account",
 						"type": "address"
 					}
 				],
@@ -128,37 +92,18 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "bool_",
 						"type": "bool"
 					}
 				],
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "isBlacklistedAddress",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_address",
+						"name": "account",
 						"type": "address"
 					}
 				],
@@ -166,37 +111,18 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "bool_",
 						"type": "bool"
 					}
 				],
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "isMerchantAddress",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_address",
+						"name": "account",
 						"type": "address"
 					}
 				],
@@ -204,30 +130,11 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "bool_",
 						"type": "bool"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "isWhitelistedAddress",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -246,32 +153,19 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address[]",
-						"name": "addresses",
-						"type": "address[]"
-					},
-					{
-						"internalType": "string",
-						"name": "metadata",
-						"type": "string"
-					}
-				],
-				"name": "removeMerchantAddresses",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
-						"name": "",
+						"name": "_from",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "_to",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
 					}
 				],
 				"name": "transferPreCheck",
@@ -288,45 +182,19 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address[]",
-						"name": "addresses",
-						"type": "address[]"
-					},
-					{
-						"internalType": "string",
-						"name": "metadata",
-						"type": "string"
-					}
-				],
-				"name": "unBlacklistAddresses",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "addresses",
-						"type": "address[]"
-					},
-					{
-						"internalType": "string",
-						"name": "metadata",
-						"type": "string"
-					}
-				],
-				"name": "unWhitelistAddresses",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
-						"name": "",
+						"name": "_unwrapper",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_valueDate",
+						"type": "uint256"
 					}
 				],
 				"name": "unwrapPreCheck",
@@ -339,28 +207,9 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "addresses",
-						"type": "address[]"
-					},
-					{
-						"internalType": "string",
-						"name": "metadata",
-						"type": "string"
-					}
-				],
-				"name": "whitelistAddresses",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
-			"author": "Monetary Authority of Singapore",
 			"events": {
 				"Blacklist(string,address[],string)": {
 					"params": {
@@ -378,8 +227,24 @@
 				}
 			},
 			"kind": "dev",
-			"methods": {},
-			"title": "PBMLogic",
+			"methods": {
+				"isBlacklisted(address)": {
+					"params": {
+						"account": "The address to query"
+					},
+					"returns": {
+						"bool_": "True if address is blacklisted, else false"
+					}
+				},
+				"isMerchant(address)": {
+					"params": {
+						"account": "The address to query"
+					},
+					"returns": {
+						"bool_": "True if the address is in merchant/redeemer whitelist and is NOT a blacklisted address, otherwise false."
+					}
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -392,8 +257,14 @@
 				}
 			},
 			"kind": "user",
-			"methods": {},
-			"notice": "Abstract contract for PBM Logic",
+			"methods": {
+				"isBlacklisted(address)": {
+					"notice": "Checks if the address is one of the blacklisted addresses"
+				},
+				"isMerchant(address)": {
+					"notice": "Checks if the address is one of the whitelisted merchant/redeemer addresses"
+				}
+			},
 			"version": 1
 		}
 	},
@@ -422,11 +293,11 @@
 			]
 		},
 		"contracts/PBMLogic.sol": {
-			"keccak256": "0x3f4b4e6104a33b243d483c7738559f19cd75052a767d763611c8f06871912ea3",
+			"keccak256": "0x83f29a6fefd311dd0ab2c72a02613b0f3b3b42cdd7bf436c7a5d2dd99cf22853",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://864da2e0fd8519eb394a2d796521ed922e65d9d6981d2d8d04ae7ca76dc942c7",
-				"dweb:/ipfs/QmQYopapECPBDDQDXactvX73a8BVmQsguBp9JCdxQKN7a9"
+				"bzz-raw://3ec04bcbd32cc8c3eb0bc1fd7de3660fffa21e12279157573f59790c6ce2042d",
+				"dweb:/ipfs/QmP4JyizYQsnsnBJDJP3Jckm1goVAWAYDShSYs6gas3yLu"
 			]
 		}
 	},

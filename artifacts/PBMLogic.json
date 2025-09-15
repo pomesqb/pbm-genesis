@@ -49,21 +49,12 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"addMerchantAddresses(address[],string)": "9e662bf2",
-			"blacklistAddresses(address[],string)": "194ef60b",
 			"isBlacklisted(address)": "fe575a87",
-			"isBlacklistedAddress(address)": "0bef0ec7",
 			"isMerchant(address)": "1a2f7167",
-			"isMerchantAddress(address)": "2633401a",
 			"isWhitelisted(address)": "3af32abf",
-			"isWhitelistedAddress(address)": "5fae0576",
 			"owner()": "8da5cb5b",
-			"removeMerchantAddresses(address[],string)": "d99940e6",
-			"transferPreCheck(address,address)": "cf48052e",
-			"unBlacklistAddresses(address[],string)": "380518e9",
-			"unWhitelistAddresses(address[],string)": "270dedb3",
-			"unwrapPreCheck(address)": "a779e260",
-			"whitelistAddresses(address[],string)": "f984a40c"
+			"transferPreCheck(address,address,uint256)": "c925e1d7",
+			"unwrapPreCheck(address,uint256,uint256)": "6d2b885d"
 		}
 	},
 	"abi": [
@@ -145,44 +136,8 @@
 		{
 			"inputs": [
 				{
-					"internalType": "address[]",
-					"name": "addresses",
-					"type": "address[]"
-				},
-				{
-					"internalType": "string",
-					"name": "metadata",
-					"type": "string"
-				}
-			],
-			"name": "addMerchantAddresses",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address[]",
-					"name": "addresses",
-					"type": "address[]"
-				},
-				{
-					"internalType": "string",
-					"name": "metadata",
-					"type": "string"
-				}
-			],
-			"name": "blacklistAddresses",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
 					"internalType": "address",
-					"name": "_address",
+					"name": "account",
 					"type": "address"
 				}
 			],
@@ -190,37 +145,18 @@
 			"outputs": [
 				{
 					"internalType": "bool",
-					"name": "",
+					"name": "bool_",
 					"type": "bool"
 				}
 			],
-			"stateMutability": "view",
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{
 			"inputs": [
 				{
 					"internalType": "address",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"name": "isBlacklistedAddress",
-			"outputs": [
-				{
-					"internalType": "bool",
-					"name": "",
-					"type": "bool"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "_address",
+					"name": "account",
 					"type": "address"
 				}
 			],
@@ -228,37 +164,18 @@
 			"outputs": [
 				{
 					"internalType": "bool",
-					"name": "",
+					"name": "bool_",
 					"type": "bool"
 				}
 			],
-			"stateMutability": "view",
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{
 			"inputs": [
 				{
 					"internalType": "address",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"name": "isMerchantAddress",
-			"outputs": [
-				{
-					"internalType": "bool",
-					"name": "",
-					"type": "bool"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "_address",
+					"name": "account",
 					"type": "address"
 				}
 			],
@@ -266,30 +183,11 @@
 			"outputs": [
 				{
 					"internalType": "bool",
-					"name": "",
+					"name": "bool_",
 					"type": "bool"
 				}
 			],
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "",
-					"type": "address"
-				}
-			],
-			"name": "isWhitelistedAddress",
-			"outputs": [
-				{
-					"internalType": "bool",
-					"name": "",
-					"type": "bool"
-				}
-			],
-			"stateMutability": "view",
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{
@@ -308,32 +206,19 @@
 		{
 			"inputs": [
 				{
-					"internalType": "address[]",
-					"name": "addresses",
-					"type": "address[]"
-				},
-				{
-					"internalType": "string",
-					"name": "metadata",
-					"type": "string"
-				}
-			],
-			"name": "removeMerchantAddresses",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
 					"internalType": "address",
-					"name": "",
+					"name": "_from",
 					"type": "address"
 				},
 				{
 					"internalType": "address",
-					"name": "",
+					"name": "_to",
 					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_tokenId",
+					"type": "uint256"
 				}
 			],
 			"name": "transferPreCheck",
@@ -350,45 +235,19 @@
 		{
 			"inputs": [
 				{
-					"internalType": "address[]",
-					"name": "addresses",
-					"type": "address[]"
-				},
-				{
-					"internalType": "string",
-					"name": "metadata",
-					"type": "string"
-				}
-			],
-			"name": "unBlacklistAddresses",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address[]",
-					"name": "addresses",
-					"type": "address[]"
-				},
-				{
-					"internalType": "string",
-					"name": "metadata",
-					"type": "string"
-				}
-			],
-			"name": "unWhitelistAddresses",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
 					"internalType": "address",
-					"name": "",
+					"name": "_unwrapper",
 					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_tokenId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_valueDate",
+					"type": "uint256"
 				}
 			],
 			"name": "unwrapPreCheck",
@@ -400,24 +259,6 @@
 				}
 			],
 			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address[]",
-					"name": "addresses",
-					"type": "address[]"
-				},
-				{
-					"internalType": "string",
-					"name": "metadata",
-					"type": "string"
-				}
-			],
-			"name": "whitelistAddresses",
-			"outputs": [],
-			"stateMutability": "nonpayable",
 			"type": "function"
 		}
 	]

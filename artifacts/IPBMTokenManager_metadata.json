@@ -145,6 +145,64 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getTokenDetails",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "balanceSupply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "expiry",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getTokenValue",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256[]",
 						"name": "tokenIds",
 						"type": "uint256[]"
@@ -226,11 +284,11 @@
 	},
 	"sources": {
 		"contracts/IPBMTokenManager.sol": {
-			"keccak256": "0xa3e6d012bed3e8eadf1107f1ff1a7ed44a93736e920a90196a24c4812603c731",
+			"keccak256": "0xb4a5bf92cdb6284b72a56ee72995ab22b823cd395aec9a62d5d92f7171a1b7a0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://240d2a13c062e152ebcbfb75846d092e9bc70f78c0708e4c52e5604c53a35105",
-				"dweb:/ipfs/Qmb3MPt1UrEmqnqrcXDbq83116FK3scCBkUgs3Vss2bd53"
+				"bzz-raw://845e5480e4da0444c960fdd1d9ec99e5d1fbde12f14e6dced6324bd3be53c2dd",
+				"dweb:/ipfs/QmTSHnUWpXpCrJxxfbh9EiTGJFJn7Uh842QKs4aQgWf32j"
 			]
 		}
 	},

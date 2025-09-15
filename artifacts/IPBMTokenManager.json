@@ -52,6 +52,8 @@
 			"createTokenType(string,uint256,uint256,address,string,uint256)": "80d69c8a",
 			"decreaseBalanceSupply(uint256[],uint256[])": "e21c8b59",
 			"getPBMRevokeValue(uint256)": "d20874d8",
+			"getTokenDetails(uint256)": "c1e03728",
+			"getTokenValue(uint256)": "d10424c7",
 			"increaseBalanceSupply(uint256[],uint256[])": "f600d9f4",
 			"revokePBM(uint256,address)": "36a3409c",
 			"uri(uint256)": "0e89341c"
@@ -185,6 +187,64 @@
 				}
 			],
 			"name": "getPBMRevokeValue",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "tokenId",
+					"type": "uint256"
+				}
+			],
+			"name": "getTokenDetails",
+			"outputs": [
+				{
+					"internalType": "string",
+					"name": "name",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "amount",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "balanceSupply",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "expiry",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address",
+					"name": "creator",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "tokenId",
+					"type": "uint256"
+				}
+			],
+			"name": "getTokenValue",
 			"outputs": [
 				{
 					"internalType": "uint256",

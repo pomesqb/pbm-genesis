@@ -4,19 +4,13 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./IPBMTokenManager.sol";
 
-/**
- * @title PBMTokenManager
- * @author Monetary Authority of Singapore
- * @notice Contract for managing PBM token types
- */
 contract PBMTokenManager is IPBMTokenManager, Ownable {
     uint256 public tokenTypeCount;
     string public URIPostExpiry;
-
     mapping(uint256 => TokenConfig) public tokenTypes;
 
     constructor(string memory _uriPostExpiry) Ownable(msg.sender) {
-        tokenTypeCount = 1; // 0 is reserved for invalid token type
+        tokenTypeCount = 1; // 0 is reserved
         URIPostExpiry = _uriPostExpiry;
     }
 
@@ -47,21 +41,14 @@ contract PBMTokenManager is IPBMTokenManager, Ownable {
         uint256[] memory tokenIds = new uint256[](1);
         tokenIds[0] = tokenId;
         require(areTokensValid(tokenIds), "PBM: Invalid token");
-        require(
-            block.timestamp > tokenTypes[tokenId].expiry,
-            "PBM: Token not expired"
-        );
+        require(block.timestamp > tokenTypes[tokenId].expiry, "PBM: Token not expired");
         require(sender == tokenTypes[tokenId].creator, "PBM: Not creator");
-
         tokenTypes[tokenId].balanceSupply = 0;
         emit PBMRevoked(tokenId, sender);
     }
 
     function increaseBalanceSupply(uint256[] memory tokenIds, uint256[] memory amounts)
-        external
-        override
-        onlyOwner
-    {
+        external override onlyOwner {
         require(tokenIds.length == amounts.length, "Array length mismatch");
         require(areTokensValid(tokenIds), "PBM: Invalid token");
         for (uint256 i = 0; i < tokenIds.length; i++) {
@@ -70,10 +57,7 @@ contract PBMTokenManager is IPBMTokenManager, Ownable {
     }
 
     function decreaseBalanceSupply(uint256[] memory tokenIds, uint256[] memory amounts)
-        external
-        override
-        onlyOwner
-    {
+        external override onlyOwner {
         require(tokenIds.length == amounts.length, "Array length mismatch");
         require(areTokensValid(tokenIds), "PBM: Invalid token");
         for (uint256 i = 0; i < tokenIds.length; i++) {
@@ -91,33 +75,17 @@ contract PBMTokenManager is IPBMTokenManager, Ownable {
 
     function areTokensValid(uint256[] memory tokenIds) public view returns (bool) {
         for (uint256 i = 0; i < tokenIds.length; i++) {
-            if (tokenIds[i] == 0 || tokenIds[i] >= tokenTypeCount) {
-                return false;
-            }
+            if (tokenIds[i] == 0 || tokenIds[i] >= tokenTypeCount) return false;
         }
         return true;
     }
 
-    function getPBMRevokeValue(uint256 tokenId)
-        public
-        view
-        override
-        returns (uint256)
-    {
+    function getPBMRevokeValue(uint256 tokenId) public view override returns (uint256) {
         return tokenTypes[tokenId].balanceSupply * tokenTypes[tokenId].amount;
     }
 
     function getTokenDetails(uint256 tokenId)
-        external
-        view
-        returns (
-            string memory,
-            uint256,
-            uint256,
-            uint256,
-            address
-        )
-    {
+        external view override returns (string memory, uint256, uint256, uint256, address) {
         return (
             tokenTypes[tokenId].name,
             tokenTypes[tokenId].amount,
@@ -127,24 +95,7 @@ contract PBMTokenManager is IPBMTokenManager, Ownable {
         );
     }
 
-    function getTokenValue(uint256 tokenId) public view returns (uint256) {
+    function getTokenValue(uint256 tokenId) public view override returns (uint256) {
         return tokenTypes[tokenId].amount;
-    }
-
-    function getTokenIdByTypeName(string memory tokenTypeName, uint256 spotAmount)
-        external
-        view
-        returns (uint256)
-    {
-        for (uint256 i = 1; i < tokenTypeCount; i++) {
-            if (
-                keccak256(abi.encodePacked(tokenTypes[i].name)) ==
-                keccak256(abi.encodePacked(tokenTypeName)) &&
-                tokenTypes[i].amount == spotAmount
-            ) {
-                return i;
-            }
-        }
-        return 0;
     }
 }

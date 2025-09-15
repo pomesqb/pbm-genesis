@@ -42,9 +42,22 @@ interface IPBMTokenManager {
         uint256[] memory tokenIds,
         uint256[] memory amounts
     ) external;
-
+        
     function uri(uint256 tokenId) external view returns (string memory);
 
+    function getTokenDetails(uint256 tokenId)
+        external
+        view
+        returns (
+            string memory name,
+            uint256 amount,
+            uint256 balanceSupply,
+            uint256 expiry,
+            address creator
+        );
+
+    function getTokenValue(uint256 tokenId) external view returns (uint256);
+        
     function getPBMRevokeValue(uint256 tokenId)
         external
         view
