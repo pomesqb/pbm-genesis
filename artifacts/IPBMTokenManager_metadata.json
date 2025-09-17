@@ -6,62 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "tokenName",
-						"type": "string"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "spotAmount",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "tokenExpiry",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "creator",
-						"type": "address"
-					}
-				],
-				"name": "NewPBMTypeCreated",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "sender",
-						"type": "address"
-					}
-				],
-				"name": "PBMRevoked",
-				"type": "event"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "string",
@@ -184,6 +128,30 @@
 			{
 				"inputs": [
 					{
+						"internalType": "string",
+						"name": "tokenTypeName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "spotAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "getTokenIdByTypeName",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "tokenId",
 						"type": "uint256"
@@ -284,11 +252,11 @@
 	},
 	"sources": {
 		"contracts/IPBMTokenManager.sol": {
-			"keccak256": "0xb4a5bf92cdb6284b72a56ee72995ab22b823cd395aec9a62d5d92f7171a1b7a0",
+			"keccak256": "0x7adc2fca41e68c7654472207c500992b5bc0e736e4df5049dec209db14f370ad",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://845e5480e4da0444c960fdd1d9ec99e5d1fbde12f14e6dced6324bd3be53c2dd",
-				"dweb:/ipfs/QmTSHnUWpXpCrJxxfbh9EiTGJFJn7Uh842QKs4aQgWf32j"
+				"bzz-raw://2aca94b99ac1e33832d579b17781bc7b486ed3b21a6f76a769d5c9ba3e756604",
+				"dweb:/ipfs/QmRbYky6cscxCJEiBkchiECWjFTRNEK7xEPxYZZMTxRfE9"
 			]
 		}
 	},

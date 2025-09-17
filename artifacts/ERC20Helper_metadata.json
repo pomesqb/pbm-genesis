@@ -216,68 +216,52 @@
 				"dweb:/ipfs/QmPFKL2r9CBsMwmUqqdcFPfHZB2qcs9g1HDrPxzWSxomvy"
 			]
 		},
-		"contracts/IERC173.sol": {
-			"keccak256": "0xaa4a16a82e5cdac20f54e8c2d682b2b34fcd644673242d5776ccd9df7afadf9e",
-			"license": "GPL-2.0-or-later",
-			"urls": [
-				"bzz-raw://a7cf002ea8f38838c373cad9e88bfa75189791f1bbc9a37ce75fbee1a55ded99",
-				"dweb:/ipfs/QmYLjRUjUmxR3oJBKbbSqwcjDXaqJ5PsKcsnRrzFqGHUX4"
-			]
-		},
-		"contracts/IERC5679Ext1155.sol": {
-			"keccak256": "0x46c9a5dc80cd063ae57f636e4fd29832034b440b2af06338b88ca591992dc313",
-			"license": "GPL-2.0-or-later",
-			"urls": [
-				"bzz-raw://dca68e60345c5b37ebf7b8495b2f91433b6de4a677b284ed5919bf91c226bf58",
-				"dweb:/ipfs/QmYkgFAoWw2inz9GvNMbT3MyRZxetjGW9f4YoYMoMW9ty1"
-			]
-		},
 		"contracts/IPBMAddressList.sol": {
-			"keccak256": "0x07c0840e052f62a4be06a2e4bd55cdf2b883abe649fc7402b03a7f0d34d534cb",
-			"license": "GPL-2.0-or-later",
+			"keccak256": "0x5f365d17f27de85f4489f6f9b052f583a7d7eff5a60d6ebbe33c925db4158adf",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://b6ff08bec076f7a1927cdf6e062ac9a76fcb8c06ff7c172974e631714e72533b",
-				"dweb:/ipfs/QmezcPURepQyvXMYh3JPSLe94ZMD4PP71yubDcxERy4vni"
+				"bzz-raw://c527a6581205301b4ec7944e0dadce36e242ae84483b1dc73f54a52039c45b4f",
+				"dweb:/ipfs/QmbGT7eNGyZK3ZejeJsceMrn5cgH5GZcNLgBGhBRigczU6"
 			]
 		},
 		"contracts/IPBMRC1.sol": {
-			"keccak256": "0x8b2e2eea08d11a6343e9b11debd6b5dee3546bfa4600771aedb16657eabfc1f2",
-			"license": "GPL-2.0-or-later",
+			"keccak256": "0x41f5cfc363adbfb5491e8d8ddfbc165cf036cd4cedb7a1500244cf8f86ca7cf6",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://f3f0b71860a91cff12827d1f5cd6cbf9e5abdd10621d1fbc89b0901b66894c45",
-				"dweb:/ipfs/QmXqHD1BFqEqdfpedhi7Y8s6ua8QnMvT82KPgFUDLxNPdz"
+				"bzz-raw://4c9e4a2b9713262a10c2e70ee93bec81942c8f2484a8bd90c70f6269c1f26543",
+				"dweb:/ipfs/QmVkCo1ZbN7hfFacuupwiLzJvHxmXGULyEckSGuKv5167R"
 			]
 		},
 		"contracts/IPBMTokenManager.sol": {
-			"keccak256": "0xb4a5bf92cdb6284b72a56ee72995ab22b823cd395aec9a62d5d92f7171a1b7a0",
+			"keccak256": "0x7adc2fca41e68c7654472207c500992b5bc0e736e4df5049dec209db14f370ad",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://845e5480e4da0444c960fdd1d9ec99e5d1fbde12f14e6dced6324bd3be53c2dd",
-				"dweb:/ipfs/QmTSHnUWpXpCrJxxfbh9EiTGJFJn7Uh842QKs4aQgWf32j"
+				"bzz-raw://2aca94b99ac1e33832d579b17781bc7b486ed3b21a6f76a769d5c9ba3e756604",
+				"dweb:/ipfs/QmRbYky6cscxCJEiBkchiECWjFTRNEK7xEPxYZZMTxRfE9"
 			]
 		},
 		"contracts/PBMLogic.sol": {
-			"keccak256": "0x83f29a6fefd311dd0ab2c72a02613b0f3b3b42cdd7bf436c7a5d2dd99cf22853",
+			"keccak256": "0x5279f69c0b9096721856b463beaa1f0cfae369b2c49c38c7e0fbc431b1656f2f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3ec04bcbd32cc8c3eb0bc1fd7de3660fffa21e12279157573f59790c6ce2042d",
-				"dweb:/ipfs/QmP4JyizYQsnsnBJDJP3Jckm1goVAWAYDShSYs6gas3yLu"
+				"bzz-raw://d1d5384e534fdb7d497c87b555434cab6696e970c0a64f5d4f60faa357c62997",
+				"dweb:/ipfs/Qmb45taRUhicoi3xea1Nu9iwueaFLZj9uXEdZzNM3Ctumi"
 			]
 		},
 		"contracts/PBMTokenManager.sol": {
-			"keccak256": "0x119d98b77ad32f92c9a38408e627fbc4aa7713e2c0f83246a04d47a48156938d",
+			"keccak256": "0xb20e377c61ca515e0165cc0bfcbf6685e179106a4500d5ba0727eb45ebf3bc9c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7ea9c7d9ef7fbbef655ffcb1312df8afbc3ae65397e526b06941a0fb94f02fc7",
-				"dweb:/ipfs/QmZsweGLdSTfcrbTPTgAb8VDz7rajrZPHa6eNtVbawsSPt"
+				"bzz-raw://8f04072deef2bf4230edce7d32154039c815ffa9f8df685afa767978a50f3525",
+				"dweb:/ipfs/Qmd2hSTktLWg1y4fSastVTwRiKcEyDeJsmiSDWpUrqLU4h"
 			]
 		},
 		"contracts/PBMWrapper.sol": {
-			"keccak256": "0x7fed5793ca637eb6b7e61714e6b45c787fecda4474cbdef45b5a61b4e9560c57",
+			"keccak256": "0xc6e5704136e89c7f7998b8e24f4e993d6614dae3bac669b724f493018b37e312",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d60ff85a584ef0226171c96c898678a9115b582d82a203552e0dc96d462a785f",
-				"dweb:/ipfs/QmZUU8rPYRCz35jUyvz4fNzgiAPRz9mbpwRs8fq9UUXv6b"
+				"bzz-raw://5023549728d1091175646388a047e921b9c863df80ce1a5580caae5e692b0063",
+				"dweb:/ipfs/QmeDE4mSyYcjazk9X66djXTpD3NZUMJkYVPk54a8XhPYD3"
 			]
 		}
 	},

@@ -53,6 +53,7 @@
 			"decreaseBalanceSupply(uint256[],uint256[])": "e21c8b59",
 			"getPBMRevokeValue(uint256)": "d20874d8",
 			"getTokenDetails(uint256)": "c1e03728",
+			"getTokenIdByTypeName(string,uint256)": "db84d995",
 			"getTokenValue(uint256)": "d10424c7",
 			"increaseBalanceSupply(uint256[],uint256[])": "f600d9f4",
 			"revokePBM(uint256,address)": "36a3409c",
@@ -60,62 +61,6 @@
 		}
 	},
 	"abi": [
-		{
-			"anonymous": false,
-			"inputs": [
-				{
-					"indexed": true,
-					"internalType": "uint256",
-					"name": "tokenId",
-					"type": "uint256"
-				},
-				{
-					"indexed": false,
-					"internalType": "string",
-					"name": "tokenName",
-					"type": "string"
-				},
-				{
-					"indexed": false,
-					"internalType": "uint256",
-					"name": "spotAmount",
-					"type": "uint256"
-				},
-				{
-					"indexed": false,
-					"internalType": "uint256",
-					"name": "tokenExpiry",
-					"type": "uint256"
-				},
-				{
-					"indexed": false,
-					"internalType": "address",
-					"name": "creator",
-					"type": "address"
-				}
-			],
-			"name": "NewPBMTypeCreated",
-			"type": "event"
-		},
-		{
-			"anonymous": false,
-			"inputs": [
-				{
-					"indexed": true,
-					"internalType": "uint256",
-					"name": "tokenId",
-					"type": "uint256"
-				},
-				{
-					"indexed": false,
-					"internalType": "address",
-					"name": "sender",
-					"type": "address"
-				}
-			],
-			"name": "PBMRevoked",
-			"type": "event"
-		},
 		{
 			"inputs": [
 				{
@@ -231,6 +176,30 @@
 					"internalType": "address",
 					"name": "creator",
 					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "tokenTypeName",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "spotAmount",
+					"type": "uint256"
+				}
+			],
+			"name": "getTokenIdByTypeName",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
 				}
 			],
 			"stateMutability": "view",

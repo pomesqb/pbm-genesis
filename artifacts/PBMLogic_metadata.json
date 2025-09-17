@@ -10,12 +10,6 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "action",
-						"type": "string"
-					},
-					{
-						"indexed": false,
 						"internalType": "address[]",
 						"name": "addresses",
 						"type": "address[]"
@@ -27,7 +21,7 @@
 						"type": "string"
 					}
 				],
-				"name": "Blacklist",
+				"name": "AddMerchantAddresses",
 				"type": "event"
 			},
 			{
@@ -35,12 +29,6 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "action",
-						"type": "string"
-					},
-					{
-						"indexed": false,
 						"internalType": "address[]",
 						"name": "addresses",
 						"type": "address[]"
@@ -52,7 +40,7 @@
 						"type": "string"
 					}
 				],
-				"name": "MerchantList",
+				"name": "BlacklistAddresses",
 				"type": "event"
 			},
 			{
@@ -60,10 +48,23 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "action",
-						"type": "string"
+						"internalType": "address[]",
+						"name": "addresses",
+						"type": "address[]"
 					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "metadata",
+						"type": "string"
+					}
+				],
+				"name": "RemoveMerchantAddresses",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
 					{
 						"indexed": false,
 						"internalType": "address[]",
@@ -77,14 +78,78 @@
 						"type": "string"
 					}
 				],
-				"name": "Whitelist",
+				"name": "UnBlacklistAddresses",
 				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address[]",
+						"name": "addresses",
+						"type": "address[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "metadata",
+						"type": "string"
+					}
+				],
+				"name": "UnWhitelistAddresses",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address[]",
+						"name": "addresses",
+						"type": "address[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "metadata",
+						"type": "string"
+					}
+				],
+				"name": "WhitelistAddresses",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_accounts",
+						"type": "address[]"
+					}
+				],
+				"name": "addMerchantAddresses",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_accounts",
+						"type": "address[]"
+					}
+				],
+				"name": "blacklistAddresses",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "account",
+						"name": "_account",
 						"type": "address"
 					}
 				],
@@ -92,18 +157,37 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "bool_",
+						"name": "",
 						"type": "bool"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "account",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isBlacklistedAddress",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_account",
 						"type": "address"
 					}
 				],
@@ -111,18 +195,37 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "bool_",
+						"name": "",
 						"type": "bool"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "account",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isMerchantAddress",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_account",
 						"type": "address"
 					}
 				],
@@ -130,11 +233,30 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "bool_",
+						"name": "",
 						"type": "bool"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isWhitelistedAddress",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -148,6 +270,19 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_accounts",
+						"type": "address[]"
+					}
+				],
+				"name": "removeMerchantAddresses",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -182,6 +317,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address[]",
+						"name": "_accounts",
+						"type": "address[]"
+					}
+				],
+				"name": "unBlacklistAddresses",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "_unwrapper",
 						"type": "address"
@@ -192,9 +340,9 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
-						"name": "_valueDate",
-						"type": "uint256"
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
 					}
 				],
 				"name": "unwrapPreCheck",
@@ -210,61 +358,13 @@
 			}
 		],
 		"devdoc": {
-			"events": {
-				"Blacklist(string,address[],string)": {
-					"params": {
-						"action": "Tags \"add\" or \"remove\" for action type",
-						"addresses": "An array of wallet addresses that was just added or removed from address blacklist",
-						"metadata": "Optional comments or notes about the added or removed addresses."
-					}
-				},
-				"MerchantList(string,address[],string)": {
-					"params": {
-						"action": "Tags \"add\" or \"remove\" for action type",
-						"addresses": "An array of merchant wallet addresses that was just added or removed from Merchant/Redeemer whitelist",
-						"metadata": "Optional comments or notes about the added or removed addresses."
-					}
-				}
-			},
 			"kind": "dev",
-			"methods": {
-				"isBlacklisted(address)": {
-					"params": {
-						"account": "The address to query"
-					},
-					"returns": {
-						"bool_": "True if address is blacklisted, else false"
-					}
-				},
-				"isMerchant(address)": {
-					"params": {
-						"account": "The address to query"
-					},
-					"returns": {
-						"bool_": "True if the address is in merchant/redeemer whitelist and is NOT a blacklisted address, otherwise false."
-					}
-				}
-			},
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
-			"events": {
-				"Blacklist(string,address[],string)": {
-					"notice": "Event emitted when the Blacklist is edited"
-				},
-				"MerchantList(string,address[],string)": {
-					"notice": "Event emitted when the Merchant/Redeemer List is edited"
-				}
-			},
 			"kind": "user",
-			"methods": {
-				"isBlacklisted(address)": {
-					"notice": "Checks if the address is one of the blacklisted addresses"
-				},
-				"isMerchant(address)": {
-					"notice": "Checks if the address is one of the whitelisted merchant/redeemer addresses"
-				}
-			},
+			"methods": {},
 			"version": 1
 		}
 	},
@@ -285,19 +385,19 @@
 	},
 	"sources": {
 		"contracts/IPBMAddressList.sol": {
-			"keccak256": "0x07c0840e052f62a4be06a2e4bd55cdf2b883abe649fc7402b03a7f0d34d534cb",
-			"license": "GPL-2.0-or-later",
+			"keccak256": "0x5f365d17f27de85f4489f6f9b052f583a7d7eff5a60d6ebbe33c925db4158adf",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://b6ff08bec076f7a1927cdf6e062ac9a76fcb8c06ff7c172974e631714e72533b",
-				"dweb:/ipfs/QmezcPURepQyvXMYh3JPSLe94ZMD4PP71yubDcxERy4vni"
+				"bzz-raw://c527a6581205301b4ec7944e0dadce36e242ae84483b1dc73f54a52039c45b4f",
+				"dweb:/ipfs/QmbGT7eNGyZK3ZejeJsceMrn5cgH5GZcNLgBGhBRigczU6"
 			]
 		},
 		"contracts/PBMLogic.sol": {
-			"keccak256": "0x83f29a6fefd311dd0ab2c72a02613b0f3b3b42cdd7bf436c7a5d2dd99cf22853",
+			"keccak256": "0x5279f69c0b9096721856b463beaa1f0cfae369b2c49c38c7e0fbc431b1656f2f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3ec04bcbd32cc8c3eb0bc1fd7de3660fffa21e12279157573f59790c6ce2042d",
-				"dweb:/ipfs/QmP4JyizYQsnsnBJDJP3Jckm1goVAWAYDShSYs6gas3yLu"
+				"bzz-raw://d1d5384e534fdb7d497c87b555434cab6696e970c0a64f5d4f60faa357c62997",
+				"dweb:/ipfs/Qmb45taRUhicoi3xea1Nu9iwueaFLZj9uXEdZzNM3Ctumi"
 			]
 		}
 	},

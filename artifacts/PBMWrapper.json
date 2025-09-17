@@ -51,12 +51,10 @@
 		"methodIdentifiers": {
 			"balanceOf(address,uint256)": "00fdd58e",
 			"balanceOfBatch(address[],uint256[])": "4e1273f4",
-			"batchMint(uint256[],uint256[],address)": "fb34b201",
 			"contractExpiry()": "89aba642",
 			"initialise(address,uint256,address)": "07e82e0f",
 			"initialised()": "07003bb4",
 			"isApprovedForAll(address,address)": "e985e9c5",
-			"mint(uint256,uint256,address)": "e7d3fe6b",
 			"owner()": "8da5cb5b",
 			"paused()": "5c975abb",
 			"pbmLogic()": "74e4c94e",
@@ -494,29 +492,6 @@
 			"type": "function"
 		},
 		{
-			"inputs": [
-				{
-					"internalType": "uint256[]",
-					"name": "tokenIds",
-					"type": "uint256[]"
-				},
-				{
-					"internalType": "uint256[]",
-					"name": "amounts",
-					"type": "uint256[]"
-				},
-				{
-					"internalType": "address",
-					"name": "receiver",
-					"type": "address"
-				}
-			],
-			"name": "batchMint",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
 			"inputs": [],
 			"name": "contractExpiry",
 			"outputs": [
@@ -587,29 +562,6 @@
 				}
 			],
 			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "uint256",
-					"name": "tokenId",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "amount",
-					"type": "uint256"
-				},
-				{
-					"internalType": "address",
-					"name": "receiver",
-					"type": "address"
-				}
-			],
-			"name": "mint",
-			"outputs": [],
-			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{

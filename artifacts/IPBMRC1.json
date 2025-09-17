@@ -49,8 +49,6 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"batchMint(uint256[],uint256[],address)": "fb34b201",
-			"mint(uint256,uint256,address)": "e7d3fe6b",
 			"owner()": "8da5cb5b",
 			"revokePBM(uint256)": "73e17e76",
 			"safeTransferFrom(address,address,uint256,uint256,bytes)": "f242432a",
@@ -132,52 +130,6 @@
 			],
 			"name": "PBMrevokeWithdraw",
 			"type": "event"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "uint256[]",
-					"name": "tokenIds",
-					"type": "uint256[]"
-				},
-				{
-					"internalType": "uint256[]",
-					"name": "amounts",
-					"type": "uint256[]"
-				},
-				{
-					"internalType": "address",
-					"name": "receiver",
-					"type": "address"
-				}
-			],
-			"name": "batchMint",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "uint256",
-					"name": "tokenId",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "amount",
-					"type": "uint256"
-				},
-				{
-					"internalType": "address",
-					"name": "receiver",
-					"type": "address"
-				}
-			],
-			"name": "mint",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
 		},
 		{
 			"inputs": [],

@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.13;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "./IPBMRC1.sol";
-import "./PBMTokenManager.sol";
+import "./IPBMTokenManager.sol";
 import "./PBMLogic.sol";
+import "./PBMTokenManager.sol";
 
 library ERC20Helper {
     using SafeERC20 for IERC20;
@@ -30,17 +31,6 @@ abstract contract PBMWrapper is ERC1155, Ownable, Pausable, IPBMRC1 {
         pbmTokenManager = address(new PBMTokenManager(_uriPostExpiry));
     }
 
-    modifier whenInitialised() {
-        require(initialised, "PBM: Contract not initialised");
-        _;
-    }
-
-    function serialise(uint256 num) internal pure returns (uint256[] memory) {
-        uint256[] memory arr = new uint256[](1);
-        arr[0] = num;
-        return arr;
-    }
-
     function initialise(address _spotToken, uint256 _expiry, address _pbmLogic)
         external virtual onlyOwner {
         require(!initialised, "PBM: Contract already initialised");
@@ -51,9 +41,20 @@ abstract contract PBMWrapper is ERC1155, Ownable, Pausable, IPBMRC1 {
         pbmLogic = PBMLogic(_pbmLogic);
         initialised = true;
     }
+
+    modifier whenInitialised() {
+        require(initialised, "PBM: Contract not initialised");
+        _;
+    }
+
+    function serialise(uint256 num) internal pure returns (uint256[] memory) {
+        uint256[] memory arr = new uint256[](1);
+        arr[0] = num;
+        return arr;
+    }
     
     function uri(uint256 tokenId) public view virtual override(ERC1155, IPBMRC1) returns (string memory) {
-        return PBMTokenManager(pbmTokenManager).uri(tokenId);
+        return IPBMTokenManager(pbmTokenManager).uri(tokenId);
     }
 
     function owner() public view virtual override(Ownable, IPBMRC1) returns (address) {
@@ -68,10 +69,11 @@ abstract contract PBMWrapper is ERC1155, Ownable, Pausable, IPBMRC1 {
         public virtual override(ERC1155, IPBMRC1) whenNotPaused {
         require(from == _msgSender() || isApprovedForAll(from, _msgSender()), "ERC1155: caller is not token owner nor approved");
         require(pbmLogic.transferPreCheck(from, to, id), "PBM Logic: transfer preCheck not satisfied.");
-        if (pbmLogic.unwrapPreCheck(to, id, 0)) { // Passing 0 as default valueDate
-            uint256 valueOfTokens = amount * (PBMTokenManager(pbmTokenManager).getTokenValue(id));
+        
+        if (pbmLogic.unwrapPreCheck(to, id, data)) {
+            uint256 valueOfTokens = amount * (IPBMTokenManager(pbmTokenManager).getTokenValue(id));
             _burn(from, id, amount);
-            PBMTokenManager(pbmTokenManager).decreaseBalanceSupply(serialise(id), serialise(amount));
+            IPBMTokenManager(pbmTokenManager).decreaseBalanceSupply(serialise(id), serialise(amount));
             ERC20Helper.safeTransfer(IERC20(spotToken), to, valueOfTokens);
             emit MerchantPayment(from, to, serialise(id), serialise(amount), spotToken, valueOfTokens);
         } else {
@@ -79,29 +81,9 @@ abstract contract PBMWrapper is ERC1155, Ownable, Pausable, IPBMRC1 {
         }
     }
 
-    function mint(uint256 tokenId, uint256 amount, address receiver) public virtual override whenNotPaused whenInitialised {
-        uint256 valueOfNewTokens = amount * (PBMTokenManager(pbmTokenManager).getTokenValue(tokenId));
-        require(pbmLogic.transferPreCheck(address(0), receiver, tokenId), "PBM: 'to' address blacklisted");
-        ERC20Helper.safeTransferFrom(IERC20(spotToken), msg.sender, address(this), valueOfNewTokens);
-        PBMTokenManager(pbmTokenManager).increaseBalanceSupply(serialise(tokenId), serialise(amount));
-        _mint(receiver, tokenId, amount, "");
-    }
-
-    function batchMint(uint256[] memory tokenIds, uint256[] memory amounts, address receiver)
-        public virtual override whenNotPaused whenInitialised {
-        uint256 valueOfNewTokens = 0;
-        for (uint256 i = 0; i < tokenIds.length; i++) {
-            valueOfNewTokens += amounts[i] * (PBMTokenManager(pbmTokenManager).getTokenValue(tokenIds[i]));
-        }
-        require(pbmLogic.transferPreCheck(address(0), receiver, tokenIds[0]), "PBM: 'to' address blacklisted");
-        ERC20Helper.safeTransferFrom(IERC20(spotToken), msg.sender, address(this), valueOfNewTokens);
-        PBMTokenManager(pbmTokenManager).increaseBalanceSupply(tokenIds, amounts);
-        _mintBatch(receiver, tokenIds, amounts, "");
-    }
-
     function revokePBM(uint256 tokenId) public virtual override whenNotPaused {
-        uint256 valueOfTokens = PBMTokenManager(pbmTokenManager).getPBMRevokeValue(tokenId);
-        PBMTokenManager(pbmTokenManager).revokePBM(tokenId, msg.sender);
+        uint256 valueOfTokens = IPBMTokenManager(pbmTokenManager).getPBMRevokeValue(tokenId);
+        IPBMTokenManager(pbmTokenManager).revokePBM(tokenId, msg.sender);
         ERC20Helper.safeTransfer(IERC20(spotToken), msg.sender, valueOfTokens);
         emit PBMrevokeWithdraw(msg.sender, tokenId, spotToken, valueOfTokens);
     }
